@@ -1,0 +1,313 @@
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumina - Creative Journal</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@300;400;500&amp;family=Varela+Round&amp;display=swap" rel="stylesheet">
+<style>
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background-color: #e4e4e7; border-radius: 20px; }
+/* Typography Enforcement */
+.font-heading { font-family: 'Varela Round', sans-serif; }
+.font-body { font-family: 'IBM Plex Serif', serif; }
+/* Animations */
+@keyframes rotate-in {
+0% { transform: translateY(40px) rotateX(10deg); opacity: 0; }
+100% { transform: translateY(0) rotateX(0); opacity: 1; }
+}
+.animate-rotate-sequence > * {
+opacity: 0;
+animation: rotate-in 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+transform-style: preserve-3d;
+perspective: 1000px;
+}
+.animate-rotate-sequence > *:nth-child(1) { animation-delay: 0.1s; }
+.animate-rotate-sequence > *:nth-child(2) { animation-delay: 0.2s; }
+.animate-rotate-sequence > *:nth-child(3) { animation-delay: 0.3s; }
+.animate-rotate-sequence > *:nth-child(4) { animation-delay: 0.4s; }
+.animate-rotate-sequence > *:nth-child(5) { animation-delay: 0.5s; }
+.hover-rotate-card { transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+.hover-rotate-card:hover { transform: rotate(-1deg) scale(1.01); }
+/* Mobile Navigation Toggle Logic (CSS only) */
+#mobile-menu-toggle:checked ~ .mobile-menu-overlay {
+opacity: 1;
+pointer-events: auto;
+}
+#mobile-menu-toggle:checked ~ .mobile-menu-content {
+transform: translateX(0);
+}
+</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+zinc: {
+50: '#fafafa',
+100: '#f4f4f5',
+200: '#e4e4e7',
+300: '#d4d4d8',
+400: '#a1a1aa',
+500: '#71717a',
+600: '#52525b',
+800: '#27272a',
+900: '#18181b',
+}
+}
+}
+}
+}
+</script>
+<style>
+/* 3D Transform utilities */
+.perspective-distant { perspective: 1200px !important; }
+</style></head>
+<body class="bg-zinc-100 min-h-screen flex items-center justify-center p-2 sm:p-4 lg:p-10 font-body selection:bg-zinc-200 selection:text-zinc-900 overflow-hidden">
+
+    <!-- Browser Frame -->
+    <div class="w-full max-w-[1400px] h-[95vh] sm:h-[90vh] bg-white rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl border border-zinc-200 flex flex-col overflow-hidden relative animate-rotate-sequence perspective-distant">
+        
+        <!-- Browser Header -->
+        <div class="h-14 sm:h-12 bg-zinc-50 border-b border-zinc-200 flex items-center justify-between px-4 sm:px-6 shrink-0 z-30">
+            
+            <div class="flex items-center gap-4">
+                <!-- Traffic Lights (Hidden on tiny screens) -->
+                <div class="hidden sm:flex gap-2">
+                    <div class="w-3 h-3 rounded-full bg-red-400/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-amber-400/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-400/80"></div>
+                </div>
+
+                <!-- Mobile Logo (Visible only on mobile) -->
+                <div class="flex sm:hidden items-center gap-2">
+                    <div class="w-7 h-7 bg-zinc-900 rounded-md flex items-center justify-center text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"></path><path d="m16.2 7.8 2.9-2.9"></path><path d="M18 12h4"></path><path d="m16.2 16.2 2.9 2.9"></path><path d="M12 18v4"></path><path d="m4.9 19.1 2.9-2.9"></path><path d="M2 12h4"></path><path d="m4.9 4.9 2.9 2.9"></path></svg>
+                    </div>
+                    <span class="font-heading font-medium text-sm tracking-tight text-zinc-900">Lumina</span>
+                </div>
+            </div>
+
+            <!-- Address Bar Mockup (Responsive) -->
+            <div class="flex-1 max-w-2xl bg-white border border-zinc-200 rounded-md h-8 flex items-center justify-center text-xs text-zinc-400 font-sans tracking-wide mx-4 hidden sm:flex">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mr-2 opacity-50"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                lumina.design/journal
+            </div>
+
+            <!-- Mobile Menu Trigger -->
+            <label for="mobile-menu-toggle" class="sm:hidden p-2 text-zinc-600 hover:bg-zinc-200 rounded-md cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </label>
+
+            <!-- Desktop Balancer -->
+            <div class="w-10 hidden sm:block"></div>
+        </div>
+
+        <!-- Main Layout -->
+        <div class="flex-1 flex overflow-hidden relative">
+            
+            <!-- Mobile Menu Implementation -->
+            <input type="checkbox" id="mobile-menu-toggle" class="hidden">
+            <div class="mobile-menu-overlay fixed inset-0 bg-zinc-900/20 backdrop-blur-sm z-40 opacity-0 pointer-events-none transition-opacity duration-300 sm:hidden"></div>
+            <div class="mobile-menu-content fixed inset-y-0 left-0 w-64 bg-white z-50 transform -translate-x-full transition-transform duration-300 shadow-2xl sm:hidden flex flex-col p-6 border-r border-zinc-200">
+                <label for="mobile-menu-toggle" class="absolute top-4 right-4 p-2 text-zinc-400 hover:text-zinc-900">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </label>
+                <!-- Mobile Nav Items (Cloned) -->
+                <div class="mt-8 space-y-2">
+                    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-zinc-50 border border-zinc-200 text-zinc-900">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                        <span class="font-heading text-sm tracking-tight">Journal</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-500 hover:bg-zinc-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>
+                        <span class="font-heading text-sm tracking-tight">Back to Site</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sidebar Navigation (Desktop) -->
+            <aside class="w-64 bg-zinc-50/50 border-r border-zinc-200 flex-col py-8 px-6 justify-between backdrop-blur-sm z-10 hidden md:flex">
+                <div>
+                    <!-- Logo -->
+                    <div class="flex items-center gap-2 mb-12">
+                        <div class="w-8 h-8 bg-zinc-900 rounded-lg flex items-center justify-center text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"></path><path d="m16.2 7.8 2.9-2.9"></path><path d="M18 12h4"></path><path d="m16.2 16.2 2.9 2.9"></path><path d="M12 18v4"></path><path d="m4.9 19.1 2.9-2.9"></path><path d="M2 12h4"></path><path d="m4.9 4.9 2.9 2.9"></path></svg>
+                        </div>
+                        <span class="font-heading font-medium text-lg tracking-tight text-zinc-900">Lumina</span>
+                    </div>
+
+                    <!-- Nav Items -->
+                    <nav class="space-y-1">
+                        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white border border-zinc-200 shadow-sm text-zinc-900 transition-all group">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-zinc-900 group-hover:scale-110 transition-transform"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                            <span class="font-heading text-sm tracking-tight">Journal</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900 transition-colors group">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:scale-110 transition-transform"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>
+                            <span class="font-heading text-sm tracking-tight">Back to Site</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900 transition-colors group">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:scale-110 transition-transform"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
+                            <span class="font-heading text-sm tracking-tight">Support</span>
+                        </a>
+                    </nav>
+
+                    <!-- Categories -->
+                    <div class="mt-10">
+                        <p class="px-3 text-xs font-heading font-medium text-zinc-400 uppercase tracking-widest mb-4">Topics</p>
+                        <div class="space-y-1 pl-3 border-l border-zinc-200 ml-3">
+                            <a href="#" class="block px-3 py-1.5 text-zinc-600 hover:text-zinc-900 text-sm hover:translate-x-1 transition-transform">Typography</a>
+                            <a href="#" class="block px-3 py-1.5 text-zinc-600 hover:text-zinc-900 text-sm hover:translate-x-1 transition-transform">Interface Design</a>
+                            <a href="#" class="block px-3 py-1.5 text-zinc-600 hover:text-zinc-900 text-sm hover:translate-x-1 transition-transform">Process</a>
+                            <a href="#" class="block px-3 py-1.5 text-zinc-600 hover:text-zinc-900 text-sm hover:translate-x-1 transition-transform">Case Studies</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Profile -->
+                <div class="flex items-center gap-3 px-3 pt-6 border-t border-zinc-200">
+                    <div class="w-8 h-8 rounded-full bg-zinc-200 border border-white shadow-sm overflow-hidden shrink-0">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&amp;fit=crop&amp;q=80&amp;w=100&amp;h=100" alt="User" class="w-full h-full object-cover grayscale opacity-80">
+                    </div>
+                    <div class="flex flex-col min-w-0">
+                        <span class="text-xs font-heading font-medium text-zinc-900 truncate">Guest User</span>
+                        <span class="text-[10px] text-zinc-500 truncate">View Profile</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-y-auto bg-zinc-100 scroll-smooth w-full">
+                <div class="max-w-4xl mx-auto px-6 py-8 md:px-12 md:py-16 animate-rotate-sequence">
+                    
+                    <!-- Header Section -->
+                    <header class="mb-12 md:mb-16 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                        <div>
+                            <span class="font-heading text-[10px] sm:text-xs font-medium tracking-[0.2em] text-zinc-400 uppercase mb-3 block">The Blog</span>
+                            <h1 class="font-heading text-3xl sm:text-4xl md:text-[40px] font-medium text-zinc-900 tracking-tight leading-none">
+                                Insights &amp; <br class="hidden sm:block"> Perspectives
+                            </h1>
+                        </div>
+                        <div class="hidden sm:block">
+                            <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-zinc-200 shadow-sm text-sm text-zinc-500 font-heading">
+                                <span>Sort by</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+                            </div>
+                        </div>
+                    </header>
+
+                    <!-- Featured Article -->
+                    <article class="group relative bg-white rounded-xl overflow-hidden shadow-[0_2px_40px_-12px_rgba(0,0,0,0.08)] border border-zinc-100 mb-12 md:mb-16 hover-rotate-card cursor-pointer">
+                        <div class="aspect-[16/9] md:aspect-[21/9] w-full overflow-hidden bg-zinc-100">
+                            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/917d6f93-fb36-439a-8c48-884b67b35381_1600w.jpg" alt="Office" class="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-700 ease-in-out opacity-90 hover:opacity-100 transform hover:scale-105">
+                        </div>
+                        <div class="p-6 md:p-10">
+                            <div class="flex flex-wrap items-center gap-3 md:gap-4 mb-4 md:mb-6 text-[10px] md:text-xs font-heading text-zinc-400 uppercase tracking-widest">
+                                <span class="text-zinc-900 font-medium">Featured</span>
+                                <span class="w-1 h-1 rounded-full bg-zinc-300"></span>
+                                <span>Oct 12, 2023</span>
+                                <span class="w-1 h-1 rounded-full bg-zinc-300"></span>
+                                <span>6 min read</span>
+                            </div>
+                            <h2 class="font-heading text-2xl md:text-[32px] font-medium text-zinc-900 mb-3 md:mb-4 tracking-tight leading-tight group-hover:text-zinc-700 transition-colors">
+                                The Psychology of Minimalist Interface Design
+                            </h2>
+                            <p class="font-body text-base md:text-[20px] text-zinc-600 leading-relaxed max-w-2xl mb-6 md:mb-8">
+                                Why less is often more when it comes to user retention and cognitive load. Exploring the subtle art of reduction in modern digital products.
+                            </p>
+                            <div class="flex items-center gap-2 text-zinc-900 font-heading font-medium text-sm border-b border-zinc-900 pb-0.5 w-max group-hover:border-zinc-400 transition-colors">
+                                Read Article
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Article Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 mb-12 md:mb-16">
+                        
+                        <!-- Article 1 -->
+                        <article class="bg-transparent border-t border-zinc-200 pt-6 md:pt-8 group cursor-pointer hover:bg-white md:hover:p-6 hover:rounded-xl hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                            <div class="mb-5 md:mb-6 overflow-hidden rounded-lg aspect-[3/2] bg-zinc-100">
+                                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4734259a-bad7-422f-981e-ce01e79184f2_1600w.jpg" alt="Abstract" class="w-full h-full object-cover grayscale opacity-80 group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                            <div class="flex items-center gap-3 mb-3 md:mb-4 text-[10px] font-heading text-zinc-400 uppercase tracking-widest">
+                                <span>Typography</span>
+                                <span class="w-px h-3 bg-zinc-200"></span>
+                                <span>Sep 28</span>
+                            </div>
+                            <h3 class="font-heading text-xl md:text-[24px] font-medium text-zinc-900 mb-2 md:mb-3 tracking-tight leading-snug">
+                                Serif Fonts in Digital Ages
+                            </h3>
+                            <p class="font-body text-base md:text-[18px] text-zinc-500 leading-relaxed mb-4 line-clamp-3">
+                                Re-evaluating the role of serif typefaces in screen-first branding and editorial layouts.
+                            </p>
+                            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-zinc-200 text-zinc-400 group-hover:bg-zinc-900 group-hover:border-zinc-900 group-hover:text-white transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+                            </span>
+                        </article>
+
+                         <!-- Article 2 -->
+                         <article class="bg-transparent border-t border-zinc-200 pt-6 md:pt-8 group cursor-pointer hover:bg-white md:hover:p-6 hover:rounded-xl hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                            <div class="mb-5 md:mb-6 overflow-hidden rounded-lg aspect-[3/2] bg-zinc-100">
+                                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/c543a9e1-f226-4ced-80b0-feb8445a75b9_1600w.jpg" alt="Workspace" class="w-full h-full object-cover grayscale opacity-80 group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                            <div class="flex items-center gap-3 mb-3 md:mb-4 text-[10px] font-heading text-zinc-400 uppercase tracking-widest">
+                                <span>Workflow</span>
+                                <span class="w-px h-3 bg-zinc-200"></span>
+                                <span>Sep 15</span>
+                            </div>
+                            <h3 class="font-heading text-xl md:text-[24px] font-medium text-zinc-900 mb-2 md:mb-3 tracking-tight leading-snug">
+                                Asynchronous Workflows
+                            </h3>
+                            <p class="font-body text-base md:text-[18px] text-zinc-500 leading-relaxed mb-4 line-clamp-3">
+                                How to structure creative teams for deep work without the constant interruption of meetings.
+                            </p>
+                            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-zinc-200 text-zinc-400 group-hover:bg-zinc-900 group-hover:border-zinc-900 group-hover:text-white transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+                            </span>
+                        </article>
+
+                    </div>
+
+                    <!-- Newsletter Section -->
+                    <div class="bg-zinc-900 rounded-xl p-6 md:p-12 text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 shadow-2xl relative overflow-hidden group">
+                        <!-- Decorative Abstract Shape -->
+                        <div class="absolute -right-10 -top-10 w-64 h-64 bg-zinc-800 rounded-full blur-3xl opacity-50 group-hover:scale-110 transition-transform duration-700"></div>
+
+                        <div class="relative z-10 w-full md:max-w-md">
+                            <h3 class="font-heading text-xl md:text-[28px] font-medium text-white mb-2 tracking-tight">Stay in the loop</h3>
+                            <p class="font-body text-sm md:text-lg text-zinc-400 leading-relaxed">Weekly curation of design resources and thoughts.</p>
+                        </div>
+
+                        <form class="relative z-10 w-full md:w-auto flex flex-col sm:flex-row gap-3">
+                            <input type="email" placeholder="email@address.com" class="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder:text-zinc-500 focus:outline-none focus:bg-white/20 focus:border-white/40 transition-all font-body w-full sm:w-64 text-sm">
+                            <button type="button" class="bg-white text-zinc-900 px-6 py-3 rounded-lg font-heading font-medium text-sm hover:bg-zinc-200 transition-colors whitespace-nowrap w-full sm:w-auto">
+                                Subscribe
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Footer -->
+                    <footer class="mt-16 md:mt-20 pt-10 border-t border-zinc-200 flex flex-col md:flex-row justify-between items-center text-zinc-400 text-xs md:text-sm gap-4 text-center md:text-left">
+                        <span class="font-body">© 2024 Lumina Creative Suite</span>
+                        <div class="flex gap-6 font-heading">
+                            <a href="#" class="hover:text-zinc-900 transition-colors">Privacy</a>
+                            <a href="#" class="hover:text-zinc-900 transition-colors">Terms</a>
+                            <a href="#" class="hover:text-zinc-900 transition-colors">Twitter</a>
+                        </div>
+                    </footer>
+
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body></html>
