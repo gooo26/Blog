@@ -1,1 +1,16 @@
+Audio Culture Journal Landing Page Template
 
+A clean, elegant landing page template designed for audio culture journals, featuring articles, interviews, and newsletter signup.
+
+Tags:
+
+Landing Page
+Hero
+Articles
+Newsletter
+Blog
+Editorial
+Audio Culture
+Responsive
+Typography
+Minimal
