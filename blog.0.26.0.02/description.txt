@@ -1,1 +1,31 @@
+Cinematic Travel Filmmaker Portfolio
 
+A cinematic dark portfolio template for travel filmmakers and visual storytellers to showcase films, travel journals, and freelance services.
+
+Kairos Studio is a cinematic portfolio template crafted for travel filmmakers and visual storytellers.
+
+What's Included
+Hero section with bold typography and atmospheric background imagery
+Horizontal scroll film gallery with hover play interactions and progress indicator
+Travel journal section for written stories and photo essays
+Gear & stats grid to highlight equipment and credentials
+Contact-focused footer with email and social links
+Key Features
+Dark, minimal, cinematic aesthetic
+Horizontal film reel layout for featured work
+Journal-style blog rows with hover imagery
+Responsive Tailwind CSS layout optimized for all screens
+Built-in smooth scrolling and reveal animations
+Ideal as a starting point for building a portfolio or landing page for directors, DPs, travel creators, and production studios showcasing films, logs, and services.
+
+
+Tags:
+
+Landing Page
+Portfolio
+Art & Design
+Minimal
+Dark
+Large Type
+Travel
+Brand
