@@ -1,1 +1,35 @@
+Luxury Travel Agency Landing Page Template 
 
+A premium landing page template for modern luxury travel agencies to showcase curated destinations, memberships, and travel journals with immersive visuals.
+
+Voyage is a luxury travel agency landing page template designed for brands that curate high-end, immersive journeys.
+
+What's Included
+Hero with bold headline, social proof, and dual CTAs
+Destination bento grid for featured trips and pricing
+Value proposition section highlighting key service pillars
+Visual spotlight banner, moodboards, and editorial-style journal
+Newsletter capture and full modern footer with links and social icons
+Key Features
+Dark, glassmorphism-inspired aesthetic with large type
+Curated destination cards with pricing and tags
+Membership and concierge storytelling blocks
+Editorial journal layout for content marketing
+Responsive Tailwind CSS layout ready to customize
+Primary Use Case
+Ideal for luxury travel agencies and boutique tour operators needing a high-impact, brand-forward landing page template to promote curated itineraries, memberships, and travel content.
+
+
+
+Tags:
+
+Landing Page
+Travel
+Services
+Brand
+Dark
+Clean
+Gradient
+Large Type
+Portfolio
+Luxury
