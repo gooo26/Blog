@@ -1,1 +1,14 @@
+Reflection Journal Interface
 
+
+Responsive UI featuring a reflective journal with digital entries, thought logs, and smooth wave backgrounds using Tailwind and Vanta.js.
+
+Tags:
+
+Reflection
+Digital Journal
+Responsive Navbar
+Tailwind CSS
+Vanta.js
+Animated Background
+Mobile Menu
