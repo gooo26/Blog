@@ -1,1 +1,39 @@
+Architecture Studio Landing Page Template
 
+A dark, minimal architecture studio landing page template for showcasing projects, capabilities, journal entries, and client inquiries with a modern editorial feel.
+
+AURA Architecture Studio Landing Page Template
+
+AURA is a sleek, dark-mode landing page template tailored for contemporary architecture and interior studios that want a cinematic, editorial web presence.
+
+What's Included
+Hero with bold typography and studio positioning
+Project showcase grid for featured work
+Studio stats and capabilities section
+Research/journal cards for insights and awards
+Contact block with modern inquiry form
+Animated preloader and smooth transitions
+Key Features
+Dark, minimal, large-type aesthetic
+Grid-based project gallery with hover interactions
+Services/Capabilities cards for clear positioning
+Journal/News layout for thought leadership
+Conversion-focused contact form with project type selector
+Primary Use Case
+Perfect as a starting point for architecture, interior, or creative studios to customize and launch a premium portfolio-style landing page that converts visitors into project inquiries.
+
+
+
+
+Tags: 
+
+Landing Page
+Services
+Brand
+Art & Design
+Portfolio
+Dark
+Minimal
+Grid
+Large Type
+Futuristic
