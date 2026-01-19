@@ -1,1 +1,13 @@
+Digital Journal Layout with Sidebar
 
+Responsive journal UI featuring a header navigation, sidebar with metadata, and styled content using Tailwind CSS and custom fonts.
+
+Tags:
+
+Journal
+Sidebar
+Navigation
+Tailwind CSS
+Responsive Design
+Metadata
+Custom Fonts
