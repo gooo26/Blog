@@ -1,0 +1,586 @@
+<html lang="en" class="scroll-smooth"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AURA — Architecture Studio</title>
+<meta name="description" content="Contemporary Architecture &amp; Design Studio">
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Tailwind & Iconify -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<!-- Configuration -->
+<script>
+tailwind.config = {
+theme: {
+extend: {
+fontFamily: {
+sans: ['Inter', 'sans-serif'],
+display: ['Manrope', 'sans-serif'],
+},
+colors: {
+background: '#050505',
+surface: '#0F0F0F',
+card: '#161616',
+border: '#222222',
+primary: '#EAEAEA',
+secondary: '#888888',
+},
+letterSpacing: {
+tighter: '-0.04em',
+tight: '-0.02em',
+},
+transitionTimingFunction: {
+'expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
+}
+}
+}
+}
+</script>
+<style>
+/* Base & Reset */
+body { background-color: #050505; color: #EAEAEA; -webkit-font-smoothing: antialiased; }
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #050505; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #555; }
+/* Utilities */
+.text-balance { text-wrap: balance; }
+.bg-grid {
+background-size: 80px 80px;
+background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+}
+/* Animations */
+.reveal-wrapper { overflow: hidden; display: block; }
+.text-reveal {
+transform: translateY(120%);
+transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+will-change: transform;
+display: inline-block;
+}
+.fade-up {
+opacity: 0;
+transform: translateY(40px);
+transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+/* Active States */
+.is-visible .text-reveal { transform: translateY(0); }
+.is-visible.fade-up, .is-visible .fade-up { opacity: 1; transform: translateY(0); }
+/* Delays */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+/* Preloader */
+#preloader.hide {
+transform: translateY(-100%);
+pointer-events: none;
+}
+</style>
+<link id="all-fonts-link-font-geist" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist">.font-geist { font-family: 'Geist', sans-serif !important; }</style><link id="all-fonts-link-font-roboto" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-roboto">.font-roboto { font-family: 'Roboto', sans-serif !important; }</style><link id="all-fonts-link-font-montserrat" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-montserrat">.font-montserrat { font-family: 'Montserrat', sans-serif !important; }</style><link id="all-fonts-link-font-poppins" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-poppins">.font-poppins { font-family: 'Poppins', sans-serif !important; }</style><link id="all-fonts-link-font-playfair" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&amp;display=swap"><style id="all-fonts-style-font-playfair">.font-playfair { font-family: 'Playfair Display', serif !important; }</style><link id="all-fonts-link-font-instrument-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-instrument-serif">.font-instrument-serif { font-family: 'Instrument Serif', serif !important; }</style><link id="all-fonts-link-font-merriweather" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;display=swap"><style id="all-fonts-style-font-merriweather">.font-merriweather { font-family: 'Merriweather', serif !important; }</style><link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-bricolage">.font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }</style><link id="all-fonts-link-font-jakarta" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-jakarta">.font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif !important; }</style><link id="all-fonts-link-font-manrope" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-manrope">.font-manrope { font-family: 'Manrope', sans-serif !important; }</style><link id="all-fonts-link-font-space-grotesk" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-space-grotesk">.font-space-grotesk { font-family: 'Space Grotesk', sans-serif !important; }</style><link id="all-fonts-link-font-work-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-work-sans">.font-work-sans { font-family: 'Work Sans', sans-serif !important; }</style><link id="all-fonts-link-font-pt-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-pt-serif">.font-pt-serif { font-family: 'PT Serif', serif !important; }</style><link id="all-fonts-link-font-geist-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist-mono">.font-geist-mono { font-family: 'Geist Mono', monospace !important; }</style><link id="all-fonts-link-font-space-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-space-mono">.font-space-mono { font-family: 'Space Mono', monospace !important; }</style><link id="all-fonts-link-font-quicksand" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-quicksand">.font-quicksand { font-family: 'Quicksand', sans-serif !important; }</style><link id="all-fonts-link-font-nunito" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-nunito">.font-nunito { font-family: 'Nunito', sans-serif !important; }</style><link id="all-fonts-link-font-newsreader" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..800&amp;display=swap"><style id="all-fonts-style-font-newsreader">.font-newsreader { font-family: 'Newsreader', serif !important; }</style><link id="all-fonts-link-font-google-sans-flex" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-google-sans-flex">.font-google-sans-flex { font-family: 'Google Sans Flex', sans-serif !important; }</style><link id="all-fonts-link-font-oswald" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-oswald">.font-oswald { font-family: 'Oswald', sans-serif !important; }</style><link id="all-fonts-link-font-dm-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-dm-sans">.font-dm-sans { font-family: 'DM Sans', sans-serif !important; }</style></head>
+<body class="overflow-hidden"><div class="fixed top-0 w-full h-screen -z-10 bg-cover bg-center" style="background-image: url(&quot;https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/44d9eae6-4c9f-4d3c-95e4-34d371c087d8_3840w.png?w=800&amp;q=80&quot;);; mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent)" data-alpha-mask="80"></div>
+
+<!-- Background (image) added by Aura -->
+
+
+    <!-- Preloader -->
+    <div class="fixed flex flex-col md:p-12 transition-transform duration-[1.5s] ease-expo bg-black z-[100] pt-6 pr-6 pb-6 pl-6 top-0 right-0 bottom-0 left-0 justify-between" id="preloader">
+        <div class="flex text-[10px] text-secondary uppercase tracking-widest font-mono w-full justify-between">
+            <span class="">Portfolio 2024</span>
+            
+        </div>
+        <div class="flex flex-col items-center">
+            <h1 class="md:text-9xl text-7xl font-bold text-zinc-50 tracking-tighter font-nunito">PRIT</h1>
+            <div class="mt-8 w-32 h-[1px] bg-white/10 overflow-hidden">
+                <div id="loader-bar" class="h-full bg-white w-0 transition-all duration-300 ease-out"></div>
+            </div>
+            <div id="loader-text" class="mt-2 font-mono text-[10px] text-secondary">0%</div>
+        </div>
+        <div class="flex justify-between w-full text-[10px] font-mono text-secondary uppercase tracking-widest">
+            <span>New York</span>
+            <span>Tokyo</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed z-50 transition-transform duration-700 -translate-y-full w-full pt-6 pr-6 pb-6 pl-6 top-0 left-0" id="navbar">
+        <div class="flex max-w-7xl mr-auto ml-auto items-center justify-between">
+            <a href="#" class="flex items-center gap-2 z-50 mix-blend-difference">
+                <div class="w-2.5 h-2.5 bg-white rounded-sm rotate-45"></div>
+                <span class="font-display font-bold text-lg tracking-tighter text-white">AURA</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-1 bg-surface/50 backdrop-blur-md border border-white/5 rounded-full px-2 py-1.5 shadow-xl">
+                <a href="#work" class="px-5 py-2 text-xs font-medium text-secondary hover:text-white hover:bg-white/10 rounded-full transition-all">Work</a>
+                <a href="#studio" class="px-5 py-2 text-xs font-medium text-secondary hover:text-white hover:bg-white/10 rounded-full transition-all">Studio</a>
+                <a href="#news" class="px-5 py-2 text-xs font-medium text-secondary hover:text-white hover:bg-white/10 rounded-full transition-all">Journal</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="#contact" class="hidden md:flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider bg-white text-black px-5 py-2.5 rounded-full hover:bg-primary transition-colors">
+                    Start Project
+                </a>
+                <button class="md:hidden text-white mix-blend-difference">
+                    <iconify-icon icon="lucide:menu" width="24" height="24"></iconify-icon>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex flex-col justify-end pb-20 px-6 overflow-hidden border-b border-border" style="">
+        <div class="absolute inset-0 bg-grid opacity-30 pointer-events-none" style=""></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background pointer-events-none"></div>
+
+        <div class="max-w-[1600px] w-full mx-auto relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+                <div class="lg:col-span-9 reveal-trigger">
+                    <div class="fade-up mb-8 inline-flex items-center gap-3 border border-white/10 bg-white/5 backdrop-blur-sm rounded-full px-4 py-1.5">
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-white/80">Available for Commissions</span>
+                    </div>
+                    <h1 class="font-display font-semibold text-[13vw] leading-[0.85] tracking-tighter text-white mix-blend-difference">
+                        <div class="reveal-wrapper">
+                            <span class="text-reveal delay-100">SCULPTING</span>
+                        </div>
+                        <div class="reveal-wrapper">
+                            <span class="text-reveal delay-200 text-secondary">THE VOID.</span>
+                        </div>
+                    </h1>
+                </div>
+                
+                <div class="lg:col-span-3 reveal-trigger lg:pb-4">
+                    <div class="fade-up delay-300">
+                        <p class="text-secondary text-sm leading-relaxed text-balance max-w-xs lg:text-right ml-auto">
+                            A global architecture practice defining the intersection of light, material, and human experience.
+                        </p>
+                        <div class="mt-8 flex justify-start lg:justify-end">
+                            <button class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 group">
+                                <iconify-icon icon="lucide:arrow-down" width="20" height="20" class="group-hover:translate-y-1 transition-transform"></iconify-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Selected Works -->
+    <section id="work" class="bg-surface">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            
+            <!-- Project 1 -->
+            <article class="group relative aspect-[4/5] md:aspect-square lg:aspect-[4/5] border-r border-b border-border overflow-hidden cursor-pointer reveal-trigger">
+                <div class="absolute inset-0 bg-black/20 z-10 group-hover:bg-black/0 transition-colors duration-500"></div>
+                <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&amp;w=2700&amp;auto=format&amp;fit=crop" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-expo" alt="Project">
+                
+                <div class="absolute top-0 left-0 w-full p-8 flex justify-between items-start z-20">
+                    <span class="font-mono text-xs text-white border border-white/20 px-2 py-1 rounded backdrop-blur-md">01</span>
+                    <div class="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 -translate-y-4 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-expo">
+                        <iconify-icon icon="lucide:arrow-up-right" width="18" height="18"></iconify-icon>
+                    </div>
+                </div>
+                
+                <div class="absolute bottom-0 left-0 w-full p-8 z-20 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-expo delay-100">
+                    <h3 class="font-display font-semibold text-2xl tracking-tight text-white">Kyoto Silent House</h3>
+                    <p class="text-xs text-white/70 mt-1">Residential — Japan</p>
+                </div>
+            </article>
+
+            <!-- Project 2 -->
+            <article class="group relative aspect-[4/5] md:aspect-square lg:aspect-[4/5] border-r border-b border-border overflow-hidden cursor-pointer reveal-trigger">
+                <div class="absolute inset-0 bg-black/20 z-10 group-hover:bg-black/0 transition-colors duration-500"></div>
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/917d6f93-fb36-439a-8c48-884b67b35381_1600w.jpg" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-expo" alt="Project">
+                
+                <div class="absolute top-0 left-0 w-full p-8 flex justify-between items-start z-20">
+                    <span class="font-mono text-xs text-white border border-white/20 px-2 py-1 rounded backdrop-blur-md">02</span>
+                    <div class="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 -translate-y-4 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-expo">
+                        <iconify-icon icon="lucide:arrow-up-right" width="18" height="18"></iconify-icon>
+                    </div>
+                </div>
+                
+                <div class="absolute bottom-0 left-0 w-full p-8 z-20 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-expo delay-100">
+                    <h3 class="font-display font-semibold text-2xl tracking-tight text-white">Mono Museum</h3>
+                    <p class="text-xs text-white/70 mt-1">Cultural — Berlin</p>
+                </div>
+            </article>
+
+            <!-- Project 3 -->
+            <article class="group relative aspect-[4/5] md:aspect-square lg:aspect-[4/5] border-b border-border overflow-hidden cursor-pointer reveal-trigger">
+                <div class="absolute inset-0 bg-black/20 z-10 group-hover:bg-black/0 transition-colors duration-500"></div>
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4734259a-bad7-422f-981e-ce01e79184f2_1600w.jpg" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-expo" alt="Project">
+                
+                <div class="absolute top-0 left-0 w-full p-8 flex justify-between items-start z-20">
+                    <span class="font-mono text-xs text-white border border-white/20 px-2 py-1 rounded backdrop-blur-md">03</span>
+                    <div class="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 -translate-y-4 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-expo">
+                        <iconify-icon icon="lucide:arrow-up-right" width="18" height="18"></iconify-icon>
+                    </div>
+                </div>
+                
+                <div class="absolute bottom-0 left-0 w-full p-8 z-20 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-expo delay-100">
+                    <h3 class="font-display font-semibold text-2xl tracking-tight text-white">Azure Tower</h3>
+                    <p class="text-xs text-white/70 mt-1">Commercial — Dubai</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Studio Statement -->
+    <section id="studio" class="py-32 px-6 border-b border-border bg-background">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24">
+                <div class="md:col-span-3 reveal-trigger">
+                    <div class="fade-up sticky top-32">
+                        <h2 class="font-mono text-[10px] uppercase tracking-widest text-secondary mb-4">The Studio</h2>
+                        <div class="w-12 h-[1px] bg-secondary/30"></div>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-9">
+                    <div class="reveal-trigger mb-24">
+                         <p class="font-display font-medium text-3xl md:text-5xl lg:text-6xl tracking-tighter leading-[1.1] text-white">
+                             <span class="reveal-wrapper block"><span class="text-reveal delay-100">Architecture is not just</span></span>
+                             <span class="reveal-wrapper block"><span class="text-reveal delay-200">about building. It is the</span></span>
+                             <span class="reveal-wrapper block"><span class="text-reveal delay-300">thoughtful <span class="text-secondary italic font-serif">manipulation</span> of</span></span>
+                             <span class="reveal-wrapper block"><span class="text-reveal delay-400">light, space, and time.</span></span>
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 pt-12 border-t border-border reveal-trigger">
+                        <div class="fade-up delay-100">
+                            <span class="block font-display font-bold text-4xl tracking-tighter mb-2">90+</span>
+                            <span class="text-xs text-secondary font-mono uppercase tracking-wider">Awards Won</span>
+                        </div>
+                        <div class="fade-up delay-200">
+                            <span class="block font-display font-bold text-4xl tracking-tighter mb-2">15</span>
+                            <span class="text-xs text-secondary font-mono uppercase tracking-wider">Global Offices</span>
+                        </div>
+                        <div class="fade-up delay-300">
+                            <span class="block font-display font-bold text-4xl tracking-tighter mb-2">300</span>
+                            <span class="text-xs text-secondary font-mono uppercase tracking-wider">Projects</span>
+                        </div>
+                        <div class="fade-up delay-400">
+                            <span class="block font-display font-bold text-4xl tracking-tighter mb-2">24</span>
+                            <span class="text-xs text-secondary font-mono uppercase tracking-wider">Years Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="py-24 px-6 border-b border-border bg-surface relative overflow-hidden">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal-trigger">
+                <div class="fade-up">
+                    <h2 class="font-display font-semibold text-4xl tracking-tight mb-4">Capabilities</h2>
+                    <p class="text-secondary text-sm max-w-md">Multidisciplinary approach blending technical precision with artistic intuition.</p>
+                </div>
+                <a href="#" class="hidden md:flex fade-up delay-100 items-center gap-2 text-xs font-bold uppercase tracking-wider hover:text-white transition-colors">
+                    All Services <iconify-icon icon="lucide:arrow-right" width="14"></iconify-icon>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal-trigger">
+                <!-- Card 1 -->
+                <div class="fade-up delay-100 p-8 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.06] hover:border-white/10 transition-all duration-500 group">
+                    <div class="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-6 text-white border border-white/10">
+                        <iconify-icon icon="lucide:box" width="24" stroke-width="1.5"></iconify-icon>
+                    </div>
+                    <h3 class="font-display font-medium text-xl text-white mb-3">Architectural Design</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-6">From initial concept sketches to full-scale construction documents for residential and commercial.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-xs text-secondary group-hover:text-white transition-colors">
+                            <div class="w-1 h-1 bg-white rounded-full"></div> Concept Development
+                        </li>
+                        <li class="flex items-center gap-2 text-xs text-secondary group-hover:text-white transition-colors">
+                            <div class="w-1 h-1 bg-white rounded-full"></div> 3D Visualization
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="fade-up delay-200 p-8 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.06] hover:border-white/10 transition-all duration-500 group">
+                    <div class="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-6 text-white border border-white/10">
+                        <iconify-icon icon="lucide:layers" width="24" stroke-width="1.5"></iconify-icon>
+                    </div>
+                    <h3 class="font-display font-medium text-xl text-white mb-3">Interior &amp; Spatial</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-6">Designing the inner void. Bespoke furniture, material selection, and lighting design.</p>
+                     <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-xs text-secondary group-hover:text-white transition-colors">
+                            <div class="w-1 h-1 bg-white rounded-full"></div> Material Research
+                        </li>
+                        <li class="flex items-center gap-2 text-xs text-secondary group-hover:text-white transition-colors">
+                            <div class="w-1 h-1 bg-white rounded-full"></div> Custom Furniture
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="fade-up delay-300 p-8 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.06] hover:border-white/10 transition-all duration-500 group">
+                    <div class="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-6 text-white border border-white/10">
+                        <iconify-icon icon="lucide:tree-deciduous" width="24" stroke-width="1.5"></iconify-icon>
+                    </div>
+                    <h3 class="font-display font-medium text-xl text-white mb-3">Urban Planning</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-6">Large scale masterplanning with a focus on sustainability and community integration.</p>
+                     <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-xs text-secondary group-hover:text-white transition-colors">
+                            <div class="w-1 h-1 bg-white rounded-full"></div> Landscape Integration
+                        </li>
+                        <li class="flex items-center gap-2 text-xs text-secondary group-hover:text-white transition-colors">
+                            <div class="w-1 h-1 bg-white rounded-full"></div> Sustainability Analysis
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Break / Research -->
+    <section class="h-[60vh] md:h-[80vh] w-full relative group overflow-hidden border-b border-border reveal-trigger">
+        <div class="absolute inset-0 bg-black">
+            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/c543a9e1-f226-4ced-80b0-feb8445a75b9_1600w.jpg" class="w-full h-full object-cover opacity-50 grayscale transition-transform duration-[2s] ease-expo group-hover:scale-105">
+        </div>
+        <div class="absolute inset-0 flex items-center justify-center p-6">
+            <div class="fade-up delay-100 backdrop-blur-md bg-black/30 border border-white/10 p-10 md:p-14 rounded-3xl max-w-xl w-full text-center">
+                <span class="text-[10px] font-mono text-white/70 uppercase tracking-widest mb-4 block">Research Study</span>
+                <h3 class="font-display font-semibold text-3xl md:text-4xl tracking-tight text-white mb-4">Concrete &amp; Nature</h3>
+                <p class="text-sm text-white/80 leading-relaxed mb-8">
+                    An exploration into how brutalist structures can coexist and support vertical vegetation in dense urban environments.
+                </p>
+                <button class="bg-white text-black px-8 py-3 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-neutral-200 transition-colors">
+                    Read The Paper
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journal -->
+    <section id="news" class="max-w-7xl mx-auto px-6 py-24 border-b border-border">
+        <div class="flex items-center justify-between mb-16 reveal-trigger">
+            <h2 class="fade-up font-display font-semibold text-3xl tracking-tight">Latest Journal</h2>
+            <a href="#" class="fade-up text-xs font-medium text-secondary hover:text-white transition-colors">View All</a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 reveal-trigger">
+            <article class="group cursor-pointer fade-up delay-100">
+                <div class="aspect-[16/10] mb-6 overflow-hidden rounded-lg bg-card border border-white/5 relative">
+                    <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/5bab247f-35d9-400d-a82b-fd87cfe913d2_1600w.webp" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500 grayscale group-hover:grayscale-0">
+                </div>
+                <div class="flex items-center gap-3 text-[10px] font-mono text-secondary mb-3 uppercase tracking-wide">
+                    <span>Oct 24, 2023</span>
+                    <span class="w-px h-3 bg-white/20"></span>
+                    <span>Theory</span>
+                </div>
+                <h3 class="font-display font-medium text-xl leading-snug text-white group-hover:text-secondary transition-colors">
+                    The return of monolithic structures in digital spaces.
+                </h3>
+            </article>
+
+            <article class="group cursor-pointer fade-up delay-200">
+                <div class="aspect-[16/10] mb-6 overflow-hidden rounded-lg bg-card border border-white/5 relative">
+                    <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/30104e3c-5eea-4b93-93e9-5313698a7156_1600w.webp" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500 grayscale group-hover:grayscale-0">
+                </div>
+                <div class="flex items-center gap-3 text-[10px] font-mono text-secondary mb-3 uppercase tracking-wide">
+                    <span>Sep 12, 2023</span>
+                    <span class="w-px h-3 bg-white/20"></span>
+                    <span>Awards</span>
+                </div>
+                <h3 class="font-display font-medium text-xl leading-snug text-white group-hover:text-secondary transition-colors">
+                    Aura recognized for sustainable innovation in Oslo.
+                </h3>
+            </article>
+
+            <article class="group cursor-pointer fade-up delay-300">
+                <div class="aspect-[16/10] mb-6 overflow-hidden rounded-lg bg-card border border-white/5 relative">
+                    <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/917d6f93-fb36-439a-8c48-884b67b35381_1600w.jpg" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500 grayscale group-hover:grayscale-0">
+                </div>
+                <div class="flex items-center gap-3 text-[10px] font-mono text-secondary mb-3 uppercase tracking-wide">
+                    <span>Aug 04, 2023</span>
+                    <span class="w-px h-3 bg-white/20"></span>
+                    <span>Materials</span>
+                </div>
+                <h3 class="font-display font-medium text-xl leading-snug text-white group-hover:text-secondary transition-colors">
+                    Light as a primary building material: A study.
+                </h3>
+            </article>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="max-w-7xl mx-auto px-6 py-24 md:py-32">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+            <div class="reveal-trigger">
+                <h2 class="font-display font-semibold text-5xl md:text-7xl tracking-tighter mb-8 leading-none text-white">
+                     <span class="reveal-wrapper block"><span class="text-reveal delay-100">BUILD THE</span></span>
+                     <span class="reveal-wrapper block"><span class="text-reveal delay-200">FUTURE.</span></span>
+                </h2>
+                <p class="fade-up delay-300 text-secondary text-lg font-light mb-12 max-w-md text-balance">
+                    We are selectively accepting new commissions for late 2024. Let's discuss your vision.
+                </p>
+
+                <div class="fade-up delay-400 space-y-6">
+                    <div class="flex items-center gap-4 group cursor-pointer">
+                        <div class="w-10 h-10 rounded-full bg-surface border border-border flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors">
+                            <iconify-icon icon="lucide:map-pin" width="18" height="18"></iconify-icon>
+                        </div>
+                        <span class="text-sm font-medium">1200 Architecture Ave, NY</span>
+                    </div>
+                    <div class="flex items-center gap-4 group cursor-pointer">
+                        <div class="w-10 h-10 rounded-full bg-surface border border-border flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors">
+                            <iconify-icon icon="lucide:mail" width="18" height="18"></iconify-icon>
+                        </div>
+                        <span class="text-sm font-medium">hello@aura-arch.com</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reveal-trigger">
+                <div class="fade-up delay-200 bg-card/30 backdrop-blur-sm p-8 md:p-10 rounded-3xl border border-white/5 shadow-2xl">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-bold text-secondary uppercase tracking-widest">Name</label>
+                                <input type="text" class="w-full bg-background/50 border border-white/10 rounded-xl p-3 text-sm focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all placeholder:text-neutral-700" placeholder="Jane Doe">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-bold text-secondary uppercase tracking-widest">Email</label>
+                                <input type="email" class="w-full bg-background/50 border border-white/10 rounded-xl p-3 text-sm focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all placeholder:text-neutral-700" placeholder="jane@example.com">
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <label class="text-[10px] font-bold text-secondary uppercase tracking-widest">Project Type</label>
+                            <div class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                                <label class="cursor-pointer shrink-0">
+                                    <input type="radio" name="type" class="peer sr-only" checked="">
+                                    <div class="px-6 py-2 rounded-full border border-white/10 text-xs font-medium text-secondary peer-checked:bg-white peer-checked:text-black peer-checked:border-white transition-all hover:bg-white/5">
+                                        Residential
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer shrink-0">
+                                    <input type="radio" name="type" class="peer sr-only">
+                                    <div class="px-6 py-2 rounded-full border border-white/10 text-xs font-medium text-secondary peer-checked:bg-white peer-checked:text-black peer-checked:border-white transition-all hover:bg-white/5">
+                                        Commercial
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer shrink-0">
+                                    <input type="radio" name="type" class="peer sr-only">
+                                    <div class="px-6 py-2 rounded-full border border-white/10 text-xs font-medium text-secondary peer-checked:bg-white peer-checked:text-black peer-checked:border-white transition-all hover:bg-white/5">
+                                        Cultural
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-bold text-secondary uppercase tracking-widest">Message</label>
+                            <textarea rows="4" class="w-full bg-background/50 border border-white/10 rounded-xl p-3 text-sm focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all resize-none placeholder:text-neutral-700" placeholder="Tell us about your project..."></textarea>
+                        </div>
+
+                        <button type="button" class="w-full bg-white text-black font-bold py-4 rounded-xl text-sm hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2 group">
+                            Send Inquiry
+                            <iconify-icon icon="lucide:arrow-right" width="16" height="16" class="group-hover:translate-x-1 transition-transform"></iconify-icon>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-border bg-background pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-10 mb-16">
+                <div>
+                    <a href="#" class="font-display font-bold text-2xl tracking-tighter uppercase mb-2 block text-white">
+                        AURA
+                    </a>
+                    <p class="text-secondary text-sm max-w-xs">Designing the void between spaces. A global architecture studio.</p>
+                </div>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-surface border border-border flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                        <iconify-icon icon="lucide:instagram" width="18" height="18"></iconify-icon>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-surface border border-border flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                        <iconify-icon icon="lucide:twitter" width="18" height="18"></iconify-icon>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-surface border border-border flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                        <iconify-icon icon="lucide:linkedin" width="18" height="18"></iconify-icon>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center text-[10px] font-mono uppercase tracking-widest text-secondary gap-4">
+                <p>© 2024 Aura Studio. All rights reserved.</p>
+                <div class="flex gap-8">
+                    <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms</a>
+                    <a href="#" class="hover:text-white transition-colors">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const preloader = document.getElementById('preloader');
+            const loaderBar = document.getElementById('loader-bar');
+            const loaderText = document.getElementById('loader-text');
+            const navbar = document.getElementById('navbar');
+
+            // 1. Preloader Animation
+            let width = 0;
+            const interval = setInterval(() => {
+                width += Math.floor(Math.random() * 5) + 2;
+                if (width > 100) width = 100;
+                
+                loaderBar.style.width = width + '%';
+                loaderText.innerText = width + '%';
+
+                if (width === 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        preloader.classList.add('hide');
+                        document.body.style.overflow = 'auto'; // Enable scrolling
+                        
+                        // Show navbar after loader
+                        setTimeout(() => {
+                            navbar.classList.remove('-translate-y-full');
+                        }, 500);
+                        
+                        // Trigger hero animations explicitly if needed, or let Observer handle it
+                    }, 500);
+                }
+            }, 30);
+
+            // 2. Intersection Observer for Scroll Animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal-trigger');
+            revealElements.forEach(el => observer.observe(el));
+        });
+    </script>
+
+</body></html>
