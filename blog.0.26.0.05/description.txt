@@ -1,1 +1,35 @@
+Minimal Mono E-commerce Landing Page Template
 
+A minimalist mono-style e-commerce landing page template for fashion brands featuring hero, collections, product grid, journal story, newsletter, and footer sections.
+
+Minimal Mono E-commerce Landing Page Template
+
+A refined, mono-type inspired fashion e-commerce template built for lifestyle and apparel brands that value storytelling and strong visual merchandising.
+
+What’s Included
+Hero section with bold imagery, dual CTAs, and announcement bar
+Collections grid for mens, womens, outerwear, and accessories
+Horizontal New Arrivals product slider with pricing and add buttons
+Featured journal/story section for brand narrative
+Newsletter signup, consent checkbox, and detailed footer with store info
+Key Features
+Minimal, type-led aesthetic with spacious layout
+Tailwind CSS-based structure for fast customization
+Mobile-ready navigation and product carousel
+Brand-forward storytelling blocks and journal teaser
+Built-in trust elements: shipping, returns, social, and payments
+Primary Use Case: Fashion, lifestyle, and goods brands launching or refreshing an online storefront with a clean, characterful landing page.
+
+
+Tags:
+
+E-commerce
+Landing Page
+Brand
+Minimal
+Clean
+Fashion
+Style
+Large Type
+Gradient
+Technology
