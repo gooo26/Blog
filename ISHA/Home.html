@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ISHA – Intelligent System & House Assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div id="pr"></div><div id="glow"></div>
+<nav>
+  <a class="logo" href="#home">ISHA</a>
+  <ul><li><a href="#features">Features</a></li><li><a href="#how">How it works</a></li><li><a href="#security">Security</a></li><li><a href="#roadmap">Roadmap</a></li><li><a href="#team">Team</a></li><li><a href="#contact">Contact</a></li></ul>
+  <a class="btn" href="#download">Download</a>
+</nav>
+
+<main>
+<div class="wrap">
+  <section class="hero" id="home">
+    <div>
+      <span class="tag">Building since 2021</span>
+      <h1>Meet ISHA, the AI assistant that lives on your PC.</h1>
+      <p>ISHA stands for Intelligent System &amp; House Assistant. Talk to it in Hindi, Hinglish or English. It opens apps, manages files, follows your hand gestures and writes code, and it always asks before doing anything risky.</p>
+      <p class="say">Try saying: <b id="ty"></b></p>
+      <div class="cta"><a class="btn" href="#download">Download ISHA</a><a class="btn ghost" href="#security">See how it stays safe</a></div>
+    </div>
+    <div class="stage" id="stage" aria-hidden="true">
+      <div class="hud" style="top:6%;left:-4%">Voice ready</div><div class="hud" style="top:48%;right:-8%;animation-delay:-2s">Safety layer active</div><div class="hud" style="bottom:6%;left:4%;animation-delay:-4s">Memory online</div>
+      <div class="scene" id="scene"><div class="ring r4"></div><div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div><div class="ring r5"></div><div class="core">ISHA</div></div>
+    </div>
+  </section>
+</div>
+
+<section class="sec" id="features"><div class="wrap">
+  <h2>What ISHA can do today</h2>
+  <p class="lead">Every feature below is already built into the ISHA desktop app.</p>
+  <div class="grid" id="feat"></div>
+</div></section>
+
+<section class="sec" id="how"><div class="wrap">
+  <h2>What happens when you talk to ISHA</h2>
+  <p class="lead">Every request follows the same six steps, so ISHA stays fast and predictable.</p>
+  <div class="flow" id="flow"></div>
+  <h3 style="margin-top:48px;font-size:1rem">Built with</h3>
+  <div class="stack" id="stack"></div>
+</div></section>
+
+<section class="sec" id="hands"><div class="wrap"><div class="lab">
+  <div><h2>Hands-free control with your webcam</h2><p class="lead" style="margin-bottom:0">Switch on gesture mode and ISHA tracks your hand with MediaPipe. A live preview window shows what it sees. Lower your hand or open your palm and the cursor stops.</p></div>
+  <div class="gest" id="gest"></div>
+</div></div></section>
+
+<section class="sec" id="security"><div class="wrap">
+  <h2>Security and safety come first</h2>
+  <p class="lead">An assistant that controls your computer must be trustworthy. Every ISHA action is sorted into one of three risk levels, and anything not yet classified is treated as needing your approval.</p>
+  <div class="tiers">
+    <div class="tier" style="--c:var(--ice)"><h3>Safe</h3><small>Runs instantly</small><ul><li>Open apps and websites</li><li>Volume, brightness, mute</li><li>CPU, RAM, battery, Wi-Fi checks</li><li>Search and read files</li><li>Play music, use memory</li></ul></div>
+    <div class="tier" style="--c:var(--gold)"><h3>Confirm</h3><small>Asks you first</small><ul><li>Write, move or rename files</li><li>Delete a file</li><li>Close a running process</li><li>Save generated code</li></ul></div>
+    <div class="tier" style="--c:var(--red)"><h3>Critical</h3><small>Asks loudly</small><ul><li>Run terminal commands</li><li>Run code files</li><li>Delete many files at once</li><li>Empty Recycle Bin</li><li>Shut down or restart</li></ul></div>
+  </div>
+  <div class="lab">
+    <ul class="guards">
+      <li>Protected system processes cannot be closed.</li>
+      <li>Only a fixed list of keyboard shortcuts can be pressed.</li>
+      <li>File actions stay inside your own folders: Desktop, Documents, Downloads, Pictures, Music and Videos.</li>
+      <li>Deleted files go to the Recycle Bin, not gone forever.</li>
+      <li>Generated code is checked against a list of dangerous patterns before it runs.</li>
+      <li>The AI model runs on your PC, so your chats stay with you.</li>
+    </ul>
+    <div class="demo">
+      <b>Try it: pick a command</b>
+      <div class="chips" id="chips"></div>
+      <div id="out"><div class="u">Choose a command to see how ISHA decides.</div></div>
+      <div class="note">Demo simulation. The real app shows a native approval dialog.</div>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec" id="roadmap"><div class="wrap">
+  <h2>From a 2021 idea to a Jarvis-class assistant</h2>
+  <p class="lead">Our goal is an assistant that sees, listens, remembers and acts, the way Jarvis does. Future items are plans and may change.</p>
+  <div class="tl">
+    <div><b>2021</b><h3>The idea begins</h3><p>We start building ISHA from scratch as a personal desktop assistant.</p></div>
+    <div style="--c:var(--ice)"><b>Today</b><h3>A capable local assistant</h3><p>Local AI brain, voice in Hindi and English, hand gestures, full PC control, long-term memory, an autonomous coder and a three-level safety system.</p></div>
+    <div style="--c:var(--gold)"><b>Next</b><h3>Always ready</h3><p>Wake word ("Hey ISHA"), face-recognition unlock, screen understanding through vision, and a custom voice.</p></div>
+    <div style="--c:var(--red)"><b>Future</b><h3>Proactive like Jarvis</h3><p>Smart-home control, a phone companion app, multi-step planning across apps, and our own fine-tuned ISHA model.</p></div>
+  </div>
+</div></section>
+
+<section class="sec" id="team"><div class="wrap">
+  <h2>The team behind ISHA</h2>
+  <p class="lead">Six people, one project. Each one shaped a different part of ISHA.</p>
+  <div class="team" id="team-grid"></div>
+</div></section>
+
+<section class="sec" id="faq"><div class="wrap faq">
+  <h2>Common questions</h2>
+  <details><summary>Does ISHA work without internet?</summary><p>The AI brain runs on your PC, so yes. The neural voice and YouTube music search need internet. Without it, ISHA switches to an offline voice.</p></details>
+  <details><summary>Can ISHA change or delete my files on its own?</summary><p>No. Writing, moving and deleting files always needs your approval, and deleted files go to the Recycle Bin.</p></details>
+  <details><summary>Which languages does it understand?</summary><p>Hindi, Hinglish and English. You can switch between them in the same conversation.</p></details>
+  <details><summary>Do I need a microphone or webcam?</summary><p>No. You can type in the chat box. The microphone (voice) and webcam (gestures) are optional extras.</p></details>
+  <details><summary>Which computer do I need?</summary><p>Windows has the fullest support, and Linux and macOS also work. Pick a model size by RAM: 8 GB for 3B, 16 GB for 7B, 32 GB for 14B.</p></details>
+</div></section>
+
+<section class="sec" id="download"><div class="wrap">
+  <div class="dl">
+    <div>
+      <h2>Get ISHA for your PC</h2>
+      <p class="lead" style="margin-bottom:26px">Install ISHA and start talking to your computer. It sets up its own Python environment on first run.</p>
+      <a class="btn" id="dlbtn" href="https://imgs.search.brave.com/0u0niEWELNx9ziV2PjP1qZcEfvmP8g1wB2bp3eHuFnc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTMx/MzA0MjU5Ny92ZWN0/b3IvNDA0LWVycm9y/LW1vYmlsZS1waG9u/ZS1wcm9ncmFtLWVy/cm9yLXdlYi1wYWdl/LWNhbm5vdC1iZS1v/cGVuZWQuanBnP3M9/NjEyeDYxMiZ3PTAm/az0yMCZjPVVMWk9l/TXlYRzkwU05hVmtF/bWs0dUVPdXYxYWxv/TVZMWjcydk1YWGo0/TXc9" target="_blank" rel="noopener noreferrer">Download for PC</a>
+    </div>
+    <ul>
+      <li><b>System:</b> Windows (best support), Linux, macOS</li>
+      <li><b>RAM:</b> 8 GB runs a 3B model, 16 GB a 7B, 32 GB a 14B</li>
+      <li><b>Optional:</b> microphone for voice, webcam for gestures</li>
+      <li><b>Internet:</b> only for the neural voice and music search</li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="sec" id="contact"><div class="wrap">
+  <h2>Contact</h2>
+  <p class="lead">Questions, ideas or want to join the project? Reach Amit directly.</p>
+  <div class="contact"><div>Email<b>a********@gmail.com</b></div><div>Mobile<b>+91 6**** *5***</b></div></div>
+</div></section>
+</main>
+<footer>© 2026 ISHA. Designed and developed by Amit Vishwakarma and team.</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
