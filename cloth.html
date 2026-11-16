@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hand Cloth Cleaner - Live Simulator & Arduino Code Generator</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #1e293b;
+      --border: #334155;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --blue: #38bdf8;
+      --green: #22c55e;
+      --orange: #f97316;
+      --red: #ef4444;
+      --purple: #a855f7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 20px;
+      line-height: 1.5;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      color: var(--blue);
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 950px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .card h2 {
+      font-size: 1.15rem;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    /* Visual Simulator Box */
+    .simulator-stage {
+      background: #0b1120;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .status-banner {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      background: #1e293b;
+      color: var(--blue);
+      margin-bottom: 16px;
+      border: 1px solid var(--blue);
+    }
+
+    .machine-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 15px;
+    }
+
+    /* Heater & Fan Visual */
+    .air-heater-row {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .component-box {
+      background: #1e293b;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 18px;
+      min-width: 140px;
+      transition: all 0.2s ease;
+    }
+
+    .component-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+    }
+
+    .component-val {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-top: 4px;
+    }
+
+    /* Fan Blade Animation */
+    .fan-icon {
+      display: inline-block;
+      font-size: 2rem;
+      margin-top: 4px;
+    }
+
+    /* Brush & Water Animation Area */
+    .brush-track {
+      width: 280px;
+      height: 85px;
+      background: #162032;
+      border: 2px dashed #475569;
+      border-radius: 10px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 8px;
+    }
+
+    .water-droplets {
+      position: absolute;
+      top: 4px;
+      font-size: 1.1rem;
+      letter-spacing: 6px;
+      opacity: 0;
+      transition: opacity 0.2s;
+      color: var(--blue);
+    }
+
+    .brush-head {
+      width: 90px;
+      height: 36px;
+      background: linear-gradient(180deg, #38bdf8, #0284c7);
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      position: relative;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .brush-head span {
+      font-size: 0.7rem;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+
+    .bristles {
+      width: 100%;
+      height: 10px;
+      background: repeating-linear-gradient(
+        90deg,
+        #f8fafc,
+        #f8fafc 4px,
+        transparent 4px,
+        transparent 7px
+      );
+    }
+
+    .cloth-surface {
+      width: 300px;
+      height: 14px;
+      background: #475569;
+      border-radius: 4px;
+      margin-top: -10px;
+    }
+
+    /* Hardware Buttons */
+    .btn-controls {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 12px 10px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: white;
+      transition: transform 0.1s, opacity 0.2s;
+    }
+
+    button:active {
+      transform: scale(0.96);
+    }
+
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .btn-wash { background: #0284c7; }
+    .btn-dry { background: #ea580c; }
+    .btn-clean { background: #16a34a; }
+    .btn-stop { background: #dc2626; }
+
+    /* Sliders Grid */
+    .sliders-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .control-group {
+      background: #0f172a;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .control-group label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .control-group label strong {
+      color: var(--blue);
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--blue);
+      cursor: pointer;
+    }
+
+    /* Live Arduino Code Output */
+    .code-header-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-copy {
+      background: var(--purple);
+      padding: 6px 14px;
+      font-size: 0.8rem;
+    }
+
+    pre {
+      background: #090d16;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      overflow-x: auto;
+      max-height: 680px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 0.82rem;
+      color: #e2e8f0;
+      line-height: 1.45;
+    }
+
+    .log-box {
+      margin-top: 14px;
+      background: #090d16;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+      height: 110px;
+      overflow-y: auto;
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Hand Cloth Cleaner — Live Simulator & Arduino Code Generator</h1>
+    <p>Sliders se speed aur timing adjust karein, live machine simulation test karein, aur updated Arduino code copy karein.</p>
+  </header>
+
+  <div class="grid-container">
+    <!-- LEFT PANEL: SIMULATOR & TUNING -->
+    <div class="card">
+      <h2>
+        <span>1. Live Machine Simulator</span>
+        <span id="cycleCounter" style="font-size: 0.85rem; color: var(--muted);">Idle</span>
+      </h2>
+
+      <!-- Visual Representation -->
+      <div class="simulator-stage">
+        <div class="status-banner" id="statusText">SYSTEM READY — Press Any Button</div>
+
+        <div class="machine-visual">
+          <!-- Heater & Fan -->
+          <div class="air-heater-row">
+            <div class="component-box" id="heaterBox">
+              <div class="component-label">Heater Coil (Pin D6)</div>
+              <div class="component-val" id="heaterVal">0 PWM (OFF)</div>
+            </div>
+
+            <div class="component-box" id="fanBox">
+              <div class="component-label">Blower Fan (Pin D9)</div>
+              <div class="fan-icon" id="fanIcon">❄️</div>
+              <div class="component-val" id="fanVal">0 PWM (OFF)</div>
+            </div>
+          </div>
+
+          <!-- Water & Brush -->
+          <div class="brush-track">
+            <div class="water-droplets" id="waterDrop">💧 💧 💧 💧 💧</div>
+            <div class="brush-head" id="brushHead">
+              <span id="brushSpeedLabel">BRUSH: 0</span>
+              <div class="bristles"></div>
+            </div>
+          </div>
+          <div class="cloth-surface"></div>
+        </div>
+      </div>
+
+      <!-- 3 Physical Buttons + Emergency Stop -->
+      <div class="btn-controls">
+        <button class="btn-wash" id="btn1" onclick="startWashCycle()">Btn 1: Wash (D2)</button>
+        <button class="btn-dry" id="btn2" onclick="startDryCycle()">Btn 2: Hot Air (D4)</button>
+        <button class="btn-clean" id="btn3" onclick="startSelfCleanCycle()">Btn 3: Self-Clean (D7)</button>
+        <button class="btn-stop" onclick="emergencyStop()">STOP ALL</button>
+      </div>
+
+      <!-- Live Parameter Sliders -->
+      <h2><span>2. Speed & Timing Controls (Live Update)</span></h2>
+      <div class="sliders-grid">
+        <!-- Wash Settings -->
+        <div class="control-group">
+          <label>Water Pump Speed (PWM): <strong id="val_pumpSpeed">180</strong></label>
+          <input type="range" id="pumpSpeed" min="80" max="255" value="180" oninput="updateConfig()" />
+        </div>
+
+        <div class="control-group">
+          <label>Wash Water Time (Sec): <strong id="val_washWaterSec">3</strong></label>
+          <input type="range" id="washWaterSec" min="1" max="10" value="3" oninput="updateConfig()" />
+        </div>
+
+        <div class="control-group">
+          <label>Wash Brush Speed (PWM): <strong id="val_brushWashSpeed">130</strong></label>
+          <input type="range" id="brushWashSpeed" min="60" max="255" value="130" oninput="updateConfig()" />
+        </div>
+
+        <div class="control-group">
+          <label>Wash Brush Time (Sec): <strong id="val_washBrushSec">5</strong></label>
+          <input type="range" id="washBrushSec" min="1" max="15" value="5" oninput="updateConfig()" />
+        </div>
+
+        <div class="control-group">
+          <label>Wash Repeat Loops: <strong id="val_washLoops">3</strong></label>
+          <input type="range" id="washLoops" min="1" max="6" value="3" oninput="updateConfig()" />
+        </div>
+
+        <!-- Heater & Dry Settings -->
+        <div class="control-group">
+          <label>Pre-Heat Power (PWM): <strong id="val_heaterPreHeat">90</strong></label>
+          <input type="range" id="heaterPreHeat" min="0" max="180" value="90" oninput="updateConfig()" />
+        </div>
+
+        <div class="control-group">
+          <label>Full Dry Heat (PWM): <strong id="val_heaterFullHeat">230</strong></label>
+          <input type="range" id="heaterFullHeat" min="100" max="255" value="230" oninput="updateConfig()" />
+        </div>
+
+        <div class="control-group">
+          <label>Hot Air Dry Time (Sec): <strong id="val_dryTimeSec">15</strong></label>
+          <input type="range" id="dryTimeSec" min="3" max="40" value="15" oninput="updateConfig()" />
+        </div>
+
+        <!-- Self-Clean Settings -->
+        <div class="control-group">
+          <label>Self-Clean Water (Sec): <strong id="val_cleanWaterSec">4</strong></label>
+          <input type="range" id="cleanWaterSec" min="1" max="10" value="4" oninput="updateConfig()" />
+        </div>
+
+        <div class="control-group">
+          <label>Self-Clean Brush Speed: <strong id="val_brushCleanSpeed">255</strong></label>
+          <input type="range" id="brushCleanSpeed" min="150" max="255" value="255" oninput="updateConfig()" />
+        </div>
+
+        <div class="control-group">
+          <label>Self-Clean Brush (Sec): <strong id="val_cleanBrushSec">10</strong></label>
+          <input type="range" id="cleanBrushSec" min="2" max="20" value="10" oninput="updateConfig()" />
+        </div>
+
+        <div class="control-group">
+          <label>Self-Clean Loops: <strong id="val_cleanLoops">2</strong></label>
+          <input type="range" id="cleanLoops" min="1" max="5" value="2" oninput="updateConfig()" />
+        </div>
+      </div>
+
+      <!-- Serial Monitor Simulation -->
+      <div class="log-box" id="serialLog">
+        [Arduino Serial Monitor] Hand Cloth Cleaner Ready!
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL: LIVE GENERATED ARDUINO CODE -->
+    <div class="card">
+      <h2>
+        <span>3. Live Arduino Code (.ino)</span>
+        <div class="code-header-actions">
+          <button class="btn-copy" id="copyBtn" onclick="copyArduinoCode()">Copy Code</button>
+        </div>
+      </h2>
+      <pre id="arduinoCodeOutput"></pre>
+    </div>
+  </div>
+
+  <script>
+    // State Variables
+    let isRunning = false;
+    let abortSignal = false;
+    let brushAnimInterval = null;
+    let fanAnimInterval = null;
+    let brushDir = 1;
+    let brushPos = 0;
+    let fanAngle = 0;
+
+    // Configuration Object (Synced with Sliders)
+    const cfg = {
+      pumpSpeed: 180,
+      washWaterSec: 3,
+      brushWashSpeed: 130,
+      washBrushSec: 5,
+      washLoops: 3,
+      heaterPreHeat: 90,
+      heaterFullHeat: 230,
+      dryTimeSec: 15,
+      cleanWaterSec: 4,
+      brushCleanSpeed: 255,
+      cleanBrushSec: 10,
+      cleanLoops: 2
+    };
+
+    // Log helper (Simulates Serial.println)
+    function logSerial(msg) {
+      const box = document.getElementById('serialLog');
+      const time = new Date().toLocaleTimeString();
+      box.innerHTML += `<div>[${time}] ${msg}</div>`;
+      box.scrollTop = box.scrollHeight;
+    }
+
+    // Update hardware visuals
+    function setHardwareState({ pump = 0, brush = 0, heater = 0, fan = 0 }) {
+      // Water Pump Visual
+      const waterEl = document.getElementById('waterDrop');
+      waterEl.style.opacity = pump > 0 ? '1' : '0';
+
+      // Heater Visual
+      const heaterBox = document.getElementById('heaterBox');
+      const heaterVal = document.getElementById('heaterVal');
+      if (heater > 0 && heater < 150) {
+        heaterBox.style.borderColor = '#f59e0b';
+        heaterBox.style.boxShadow = '0 0 12px rgba(245, 158, 11, 0.4)';
+        heaterVal.innerText = `${heater} PWM (PRE-HEAT)`;
+        heaterVal.style.color = '#fbbf24';
+      } else if (heater >= 150) {
+        heaterBox.style.borderColor = '#ef4444';
+        heaterBox.style.boxShadow = '0 0 18px rgba(239, 68, 68, 0.7)';
+        heaterVal.innerText = `${heater} PWM (FULL HOT)`;
+        heaterVal.style.color = '#f87171';
+      } else {
+        heaterBox.style.borderColor = '#334155';
+        heaterBox.style.boxShadow = 'none';
+        heaterVal.innerText = '0 PWM (OFF)';
+        heaterVal.style.color = '#f8fafc';
+      }
+
+      // Fan Visual
+      const fanBox = document.getElementById('fanBox');
+      const fanVal = document.getElementById('fanVal');
+      const fanIcon = document.getElementById('fanIcon');
+      clearInterval(fanAnimInterval);
+      if (fan > 0) {
+        fanBox.style.borderColor = '#38bdf8';
+        fanVal.innerText = `${fan} PWM (ON)`;
+        fanIcon.innerText = '🌀';
+        fanAnimInterval = setInterval(() => {
+          fanAngle = (fanAngle + 30) % 360;
+          fanIcon.style.transform = `rotate(${fanAngle}deg)`;
+        }, 40);
+      } else {
+        fanBox.style.borderColor = '#334155';
+        fanVal.innerText = '0 PWM (OFF)';
+        fanIcon.innerText = '❄️';
+        fanIcon.style.transform = 'rotate(0deg)';
+      }
+
+      // Brush Left-Right Reciprocating Visual
+      const brushHead = document.getElementById('brushHead');
+      const brushLabel = document.getElementById('brushSpeedLabel');
+      clearInterval(brushAnimInterval);
+      brushLabel.innerText = `BRUSH: ${brush}`;
+      if (brush > 0) {
+        brushHead.style.background = brush > 200
+          ? 'linear-gradient(180deg, #22c55e, #15803d)'
+          : 'linear-gradient(180deg, #38bdf8, #0284c7)';
+        // Speed determines interval delay
+        const stepSpeed = Math.max(12, Math.floor(3500 / brush));
+        brushAnimInterval = setInterval(() => {
+          brushPos += brushDir * 12;
+          if (brushPos > 65 || brushPos < -65) brushDir *= -1;
+          brushHead.style.transform = `translateX(${brushPos}px)`;
+        }, stepSpeed);
+      } else {
+        brushPos = 0;
+        brushHead.style.transform = 'translateX(0px)';
+      }
+    }
+
+    // Interruptible sleep function
+    function sleep(ms) {
+      return new Promise((resolve) => {
+        const start = Date.now();
+        const check = setInterval(() => {
+          if (abortSignal || Date.now() - start >= ms) {
+            clearInterval(check);
+            resolve();
+          }
+        }, 50);
+      });
+    }
+
+    function toggleButtons(disabled) {
+      document.getElementById('btn1').disabled = disabled;
+      document.getElementById('btn2').disabled = disabled;
+      document.getElementById('btn3').disabled = disabled;
+    }
+
+    // 1. WASH CYCLE SIMULATION
+    async function startWashCycle() {
+      if (isRunning) return;
+      isRunning = true;
+      abortSignal = false;
+      toggleButtons(true);
+
+      logSerial('Starting Wash Cycle + Pre-heating...');
+      document.getElementById('statusText').innerText = 'MODE 1: WASHING + PRE-HEATING';
+
+      for (let i = 1; i <= cfg.washLoops; i++) {
+        if (abortSignal) break;
+        document.getElementById('cycleCounter').innerText = `Wash Loop ${i} / ${cfg.washLoops}`;
+        logSerial(`Wash Loop: ${i} -> Spraying Water (${cfg.washWaterSec}s)`);
+
+        // Water ON + Pre-heat ON
+        setHardwareState({ pump: cfg.pumpSpeed, brush: 0, heater: cfg.heaterPreHeat, fan: 0 });
+        await sleep(cfg.washWaterSec * 1000);
+        if (abortSignal) break;
+
+        // Brush ON + Pre-heat ON
+        logSerial(`Wash Loop: ${i} -> Scrubbing Brush (${cfg.washBrushSec}s)`);
+        setHardwareState({ pump: 0, brush: cfg.brushWashSpeed, heater: cfg.heaterPreHeat, fan: 0 });
+        await sleep(cfg.washBrushSec * 1000);
+      }
+
+      if (!abortSignal) {
+        // Keep pre-heat active after wash finishes
+        setHardwareState({ pump: 0, brush: 0, heater: cfg.heaterPreHeat, fan: 0 });
+        document.getElementById('statusText').innerText = 'WASH COMPLETE (Heater Pre-Heated Ready)';
+        document.getElementById('cycleCounter').innerText = 'Ready for Dry';
+        logSerial('Wash Cycle Complete! Heater is pre-heated and ready.');
+      }
+
+      isRunning = false;
+      toggleButtons(false);
+    }
+
+    // 2. HOT AIR DRY CYCLE SIMULATION
+    async function startDryCycle() {
+      if (isRunning) return;
+      isRunning = true;
+      abortSignal = false;
+      toggleButtons(true);
+
+      logSerial(`Starting Hot Air Dry Cycle (${cfg.dryTimeSec}s)...`);
+      document.getElementById('statusText').innerText = 'MODE 2: HOT AIR DRYING';
+      document.getElementById('cycleCounter').innerText = `Drying (${cfg.dryTimeSec}s)`;
+
+      setHardwareState({ pump: 0, brush: 0, heater: cfg.heaterFullHeat, fan: 255 });
+      await sleep(cfg.dryTimeSec * 1000);
+
+      if (!abortSignal) {
+        logSerial('Cooling heater coil (3s safety fan)...');
+        document.getElementById('statusText').innerText = 'SAFETY COOL-DOWN (3s Fan Only)';
+        setHardwareState({ pump: 0, brush: 0, heater: 0, fan: 255 });
+        await sleep(3000);
+      }
+
+      if (!abortSignal) {
+        setHardwareState({ pump: 0, brush: 0, heater: 0, fan: 0 });
+        document.getElementById('statusText').innerText = 'DRYING COMPLETE — SYSTEM READY';
+        document.getElementById('cycleCounter').innerText = 'Idle';
+        logSerial('Drying Complete!');
+      }
+
+      isRunning = false;
+      toggleButtons(false);
+    }
+
+    // 3. SELF-CLEAN CYCLE SIMULATION
+    async function startSelfCleanCycle() {
+      if (isRunning) return;
+      isRunning = true;
+      abortSignal = false;
+      toggleButtons(true);
+
+      logSerial('Starting Brush Self-Clean Cycle...');
+      document.getElementById('statusText').innerText = 'MODE 3: BRUSH SELF-CLEANING';
+
+      for (let i = 1; i <= cfg.cleanLoops; i++) {
+        if (abortSignal) break;
+        document.getElementById('cycleCounter').innerText = `Clean Loop ${i} / ${cfg.cleanLoops}`;
+        logSerial(`Self-Clean Loop: ${i} -> Water Jet (${cfg.cleanWaterSec}s)`);
+
+        setHardwareState({ pump: cfg.pumpSpeed, brush: 0, heater: 0, fan: 0 });
+        await sleep(cfg.cleanWaterSec * 1000);
+        if (abortSignal) break;
+
+        logSerial(`Self-Clean Loop: ${i} -> High-Speed Brush (${cfg.cleanBrushSec}s)`);
+        setHardwareState({ pump: 0, brush: cfg.brushCleanSpeed, heater: 0, fan: 0 });
+        await sleep(cfg.cleanBrushSec * 1000);
+      }
+
+      if (!abortSignal) {
+        setHardwareState({ pump: 0, brush: 0, heater: 0, fan: 0 });
+        document.getElementById('statusText').innerText = 'SELF-CLEAN COMPLETE — SYSTEM READY';
+        document.getElementById('cycleCounter').innerText = 'Idle';
+        logSerial('Brush Self-Clean Complete!');
+      }
+
+      isRunning = false;
+      toggleButtons(false);
+    }
+
+    // EMERGENCY STOP
+    function emergencyStop() {
+      abortSignal = true;
+      isRunning = false;
+      setHardwareState({ pump: 0, brush: 0, heater: 0, fan: 0 });
+      document.getElementById('statusText').innerText = 'STOPPED — ALL OUTPUTS OFF';
+      document.getElementById('cycleCounter').innerText = 'Stopped';
+      toggleButtons(false);
+      logSerial('EMERGENCY STOP: All motors and heater turned OFF.');
+    }
+
+    // Update Config from Sliders and Regenerate Arduino Code
+    function updateConfig() {
+      for (const key in cfg) {
+        const el = document.getElementById(key);
+        if (el) {
+          cfg[key] = parseInt(el.value, 10);
+          document.getElementById('val_' + key).innerText = cfg[key];
+        }
+      }
+      generateArduinoCode();
+    }
+
+    // Live Arduino Code Generator
+    function generateArduinoCode() {
+      const code = `// ========================================================
+// HAND CLOTH CLEANER & DRYER - AUTO-GENERATED ARDUINO CODE
+// ========================================================
+
+// --- Pin Definitions (PWM Pins for Speed & Heat Control) ---
+const int brushMotorPin = 3;  // Brush left-right motor
+const int waterPumpPin  = 5;  // Water pump
+const int heaterPin     = 6;  // 12V Heating coil
+const int fanPin        = 9;  // Blower fan
+
+// --- Button Pins (Active LOW with Internal Pull-up) ---
+const int btnWashPin      = 2; // Button 1: Wash Cycle
+const int btnDryPin       = 4; // Button 2: Hot Air Dry Cycle
+const int btnSelfCleanPin = 7; // Button 3: Brush Self-Clean
+
+// --- Tuned Speed & Heat Settings (0 to 255 PWM) ---
+const int pumpNormalSpeed   = ${cfg.pumpSpeed};
+const int brushWashSpeed    = ${cfg.brushWashSpeed};
+const int brushCleanSpeed   = ${cfg.brushCleanSpeed};
+
+const int heaterPreHeat     = ${cfg.heaterPreHeat};
+const int heaterFullHeat    = ${cfg.heaterFullHeat};
+const int fanSpeed          = 255;
+
+// --- Tuned Timing & Loop Settings ---
+const int washWaterTimeMs   = ${cfg.washWaterSec * 1000};
+const int washBrushTimeMs   = ${cfg.washBrushSec * 1000};
+const int washRepeatLoops   = ${cfg.washLoops};
+
+const int dryDurationMs     = ${cfg.dryTimeSec * 1000};
+const int fanCoolDownMs     = 3000;
+
+const int cleanWaterTimeMs  = ${cfg.cleanWaterSec * 1000};
+const int cleanBrushTimeMs  = ${cfg.cleanBrushSec * 1000};
+const int cleanRepeatLoops  = ${cfg.cleanLoops};
+
+void setup() {
+  pinMode(brushMotorPin, OUTPUT);
+  pinMode(waterPumpPin, OUTPUT);
+  pinMode(heaterPin, OUTPUT);
+  pinMode(fanPin, OUTPUT);
+
+  pinMode(btnWashPin, INPUT_PULLUP);
+  pinMode(btnDryPin, INPUT_PULLUP);
+  pinMode(btnSelfCleanPin, INPUT_PULLUP);
+
+  stopAll();
+  Serial.begin(9600);
+  Serial.println("Hand Cloth Cleaner Ready!");
+}
+
+void loop() {
+  if (digitalRead(btnWashPin) == LOW) {
+    delay(200);
+    runWashCycle();
+  }
+  else if (digitalRead(btnDryPin) == LOW) {
+    delay(200);
+    runDryCycle();
+  }
+  else if (digitalRead(btnSelfCleanPin) == LOW) {
+    delay(200);
+    runSelfCleanCycle();
+  }
+}
+
+// 1. WASH CYCLE (Button 1)
+void runWashCycle() {
+  Serial.println("Starting Wash Cycle + Pre-heating...");
+  analogWrite(heaterPin, heaterPreHeat);
+
+  for (int i = 1; i <= washRepeatLoops; i++) {
+    Serial.print("Wash Loop: ");
+    Serial.println(i);
+
+    analogWrite(waterPumpPin, pumpNormalSpeed);
+    delay(washWaterTimeMs);
+    analogWrite(waterPumpPin, 0);
+
+    analogWrite(brushMotorPin, brushWashSpeed);
+    delay(washBrushTimeMs);
+    analogWrite(brushMotorPin, 0);
+  }
+
+  Serial.println("Wash Cycle Complete! Heater is pre-heated.");
+}
+
+// 2. HOT AIR DRY CYCLE (Button 2)
+void runDryCycle() {
+  Serial.println("Starting Hot Air Dry Cycle...");
+  analogWrite(heaterPin, heaterFullHeat);
+  analogWrite(fanPin, fanSpeed);
+
+  delay(dryDurationMs);
+
+  // Safety Cool-down
+  analogWrite(heaterPin, 0);
+  Serial.println("Cooling heater coil...");
+  delay(fanCoolDownMs);
+
+  stopAll();
+  Serial.println("Drying Complete!");
+}
+
+// 3. SELF-CLEAN CYCLE (Button 3)
+void runSelfCleanCycle() {
+  Serial.println("Starting Brush Self-Clean Cycle...");
+  analogWrite(heaterPin, 0);
+  analogWrite(fanPin, 0);
+
+  for (int i = 1; i <= cleanRepeatLoops; i++) {
+    Serial.print("Self-Clean Loop: ");
+    Serial.println(i);
+
+    analogWrite(waterPumpPin, pumpNormalSpeed);
+    delay(cleanWaterTimeMs);
+    analogWrite(waterPumpPin, 0);
+
+    analogWrite(brushMotorPin, brushCleanSpeed);
+    delay(cleanBrushTimeMs);
+    analogWrite(brushMotorPin, 0);
+  }
+
+  stopAll();
+  Serial.println("Brush Self-Clean Complete!");
+}
+
+void stopAll() {
+  analogWrite(brushMotorPin, 0);
+  analogWrite(waterPumpPin, 0);
+  analogWrite(heaterPin, 0);
+  analogWrite(fanPin, 0);
+}`;
+
+      document.getElementById('arduinoCodeOutput').textContent = code;
+    }
+
+    // Copy Code Button
+    function copyArduinoCode() {
+      const code = document.getElementById('arduinoCodeOutput').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        const btn = document.getElementById('copyBtn');
+        btn.innerText = 'Copied! ✓';
+        btn.style.background = '#16a34a';
+        setTimeout(() => {
+          btn.innerText = 'Copy Code';
+          btn.style.background = '#a855f7';
+        }, 2000);
+      });
+    }
+
+    // Initialize on load
+    generateArduinoCode();
+  </script>
+</body>
+</html>
+
