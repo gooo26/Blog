@@ -22,7 +22,6 @@
       --lg-orange-accent: #fdba74;
 
       --blue: #7dd3fc;
-      --red: #fca5a5;
       --purple: #c4b5fd;
     }
 
@@ -45,7 +44,6 @@
       overflow-x: hidden;
     }
 
-    /* Liquid Glass Card / Sidebar Base */
     .glass-panel {
       background: var(--glass-bg);
       backdrop-filter: blur(20px) saturate(150%);
@@ -67,8 +65,7 @@
     }
 
     header h1 {
-      font-size: 1.55rem;
-      letter-spacing: 0.3px;
+      font-size: 1.5rem;
       background: linear-gradient(90deg, #e0f2fe, #86efac, #fdba74);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -76,7 +73,7 @@
 
     header p {
       color: var(--muted);
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       margin-top: 4px;
     }
 
@@ -106,7 +103,6 @@
       align-items: center;
     }
 
-    /* Improved Visual Animation Stage */
     .anim-stage {
       background: rgba(6, 12, 24, 0.65);
       backdrop-filter: blur(12px);
@@ -146,7 +142,7 @@
 
     .visual-grid {
       display: grid;
-      grid-template-columns: 1fr 1.4fr;
+      grid-template-columns: 0.85fr 1.55fr;
       gap: 14px;
       align-items: center;
     }
@@ -157,17 +153,11 @@
       }
     }
 
-    .air-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
     .mini-glass-box {
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.16);
       border-radius: 14px;
-      padding: 10px 12px;
+      padding: 14px 12px;
       transition: all 0.2s ease;
     }
 
@@ -182,18 +172,17 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 4px;
+      margin-top: 8px;
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 1rem;
     }
 
     .fan-rotor {
       display: inline-block;
-      font-size: 1.4rem;
+      font-size: 1.8rem;
       transition: transform 0.04s linear;
     }
 
-    /* Brush & Water Chamber */
     .chamber-box {
       background: rgba(15, 23, 42, 0.75);
       border: 1px solid rgba(255, 255, 255, 0.18);
@@ -251,7 +240,7 @@
     }
 
     .brush-carriage {
-      width: 104px;
+      width: 112px;
       height: 34px;
       border-radius: 8px;
       background: linear-gradient(135deg, rgba(125, 211, 252, 0.85), rgba(2, 132, 199, 0.9));
@@ -265,7 +254,7 @@
     }
 
     .brush-carriage span {
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       font-weight: 800;
       color: #06101f;
     }
@@ -297,7 +286,6 @@
       color: #e2e8f0;
     }
 
-    /* Hardware Control Buttons */
     .btn-row {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -346,11 +334,10 @@
 
     .b-wash { border-color: rgba(125, 211, 252, 0.55); background: rgba(2, 132, 199, 0.35); }
     .b-clean { border-color: rgba(134, 239, 172, 0.55); background: rgba(22, 163, 74, 0.35); }
-    .b-dry-on { border-color: rgba(253, 186, 116, 0.55); background: rgba(234, 88, 12, 0.35); }
-    .b-dry-off { border-color: rgba(251, 191, 36, 0.55); background: rgba(180, 83, 9, 0.35); }
+    .b-fan-on { border-color: rgba(253, 186, 116, 0.55); background: rgba(234, 88, 12, 0.35); }
+    .b-fan-off { border-color: rgba(251, 191, 36, 0.55); background: rgba(180, 83, 9, 0.35); }
     .b-stop { border-color: rgba(252, 165, 165, 0.55); background: rgba(220, 38, 38, 0.35); }
 
-    /* 4 Square-ish Slightly Rounded Boxes (2 Light Green + 2 Light Orange) */
     .four-boxes-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -389,7 +376,6 @@
     .sq-header {
       font-size: 0.86rem;
       font-weight: 800;
-      letter-spacing: 0.2px;
     }
 
     .box-light-green .sq-header { color: var(--lg-green-accent); }
@@ -428,18 +414,12 @@
       text-align: center;
     }
 
-    .num-input:focus {
-      outline: none;
-      border-color: #7dd3fc;
-    }
-
     input[type="range"] {
       width: 100%;
       cursor: pointer;
       accent-color: #38bdf8;
     }
 
-    /* Last 2 Loop Count Boxes (Light Green & Light Orange) */
     .loops-row {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -484,7 +464,6 @@
       text-align: center;
     }
 
-    /* Right Glass Sidebar: Live Arduino Code */
     .code-sidebar {
       position: sticky;
       top: 20px;
@@ -533,12 +512,12 @@
 <body>
 
   <header class="glass-panel">
-    <h1>Hand Cloth Cleaner</h1>
-    <p>Arduino live update</p>
+    <h1>Hand Cloth Cleaner — Liquid Glass Simulator & Arduino Code Sync</h1>
+    <p>Pin 2 Wash (Pump + Brush Together) | Pin 4 Fan ON | Pin 8 Fan OFF | Pin 7 Self-Clean (Unchanged)</p>
   </header>
 
   <div class="main-layout">
-    <!-- LEFT: ANIMATION + BUTTONS + 4 ROUNDED BOXES + 2 LOOP BOXES -->
+    <!-- LEFT: ANIMATION + 4 BUTTONS + 4 BOXES + 2 LOOP BOXES -->
     <div class="glass-panel">
       <div class="section-title">
         <span>Live Machine Animation</span>
@@ -547,33 +526,26 @@
 
       <div class="anim-stage">
         <div class="status-row">
-          <div class="status-pill" id="statusText">READY — Press Wash, Hot Air ON, or Self-Clean</div>
+          <div class="status-pill" id="statusText">READY — Press Any Button</div>
           <div class="loop-badge" id="loopProgress">Loop: 0 / 0</div>
         </div>
 
         <div class="visual-grid">
-          <div class="air-stack">
-            <div class="mini-glass-box" id="heaterGlass">
-              <div class="mini-title">Heater Coil</div>
-              <div class="mini-main">
-                <span id="heaterText">OFF (0)</span>
-                <span>🔥</span>
-              </div>
+          <div class="mini-glass-box" id="fanGlass">
+            <div class="mini-title">Blower Fan (Pin ~9)</div>
+            <div class="mini-main">
+              <span id="fanText">OFF (0)</span>
+              <span class="fan-rotor" id="fanRotor">🌀</span>
             </div>
-
-            <div class="mini-glass-box" id="fanGlass">
-              <div class="mini-title">Blower Fan</div>
-              <div class="mini-main">
-                <span id="fanText">OFF (0)</span>
-                <span class="fan-rotor" id="fanRotor">🌀</span>
-              </div>
+            <div style="font-size: 0.72rem; color: var(--muted); margin-top: 8px;">
+              Pin 4 = ON | Pin 8 = OFF
             </div>
           </div>
 
           <div class="chamber-box">
             <div class="chamber-top">
-              <span id="pumpStatusLabel">Pump OFF</span>
-              <span id="servoStatusLabel">SG90 90°</span>
+              <span id="pumpStatusLabel">Pump (D5): OFF</span>
+              <span id="servoStatusLabel">SG90 (D3): 90°</span>
             </div>
 
             <div class="spray-zone" id="sprayZone">
@@ -595,18 +567,18 @@
         </div>
       </div>
 
-      <!-- Buttons -->
+      <!-- 4 Buttons -->
       <div class="btn-row">
-        <button class="b-wash" id="btnWash" onclick="startWashCycle()">Btn 1: Wash (D2)</button>
-        <button class="b-clean" id="btnClean" onclick="startSelfCleanCycle()">Btn 3: Self-Clean (D7)</button>
+        <button class="b-wash" id="btnWash" onclick="startWashCycle()">Pin 2: Wash (Pump + Brush Together)</button>
+        <button class="b-clean" id="btnClean" onclick="startSelfCleanCycle()">Pin 7: Self-Clean (Unchanged)</button>
       </div>
       <div class="btn-row-3">
-        <button class="b-dry-on" id="btnHotAirOn" onclick="startHotAirOn()">Hot Air ON (D4)</button>
-        <button class="b-dry-off" id="btnHotAirOff" onclick="stopHotAirOff()">Hot Air OFF (D8)</button>
+        <button class="b-fan-on" id="btnFanOn" onclick="turnFanOn()">Pin 4: Fan ON</button>
+        <button class="b-fan-off" id="btnFanOff" onclick="turnFanOff()">Pin 8: Fan OFF</button>
         <button class="b-stop" onclick="stopAllNow()">STOP ALL</button>
       </div>
 
-      <!-- 4 SQUARISH SLIGHTLY ROUNDED BOXES: 2 LIGHT GREEN + 2 LIGHT ORANGE -->
+      <!-- 4 SQUARISH SLIGHTLY ROUNDED BOXES -->
       <div class="section-title">
         <span>Speed & Timing Controls (Slide or Type)</span>
       </div>
@@ -614,7 +586,7 @@
       <div class="four-boxes-grid">
         <!-- Light Green Box 1: Pump & Brush Speed -->
         <div class="sq-box box-light-green">
-          <div class="sq-header">1. Pump & Brush Speed</div>
+          <div class="sq-header">1. Pump & Brush Speed (Light Green)</div>
 
           <div class="ctrl-item">
             <div class="ctrl-top">
@@ -635,19 +607,19 @@
 
         <!-- Light Green Box 2: Pump & Brush Timing -->
         <div class="sq-box box-light-green">
-          <div class="sq-header">2. Pump & Brush Timing</div>
+          <div class="sq-header">2. Pump & Brush Timing (Light Green)</div>
 
           <div class="ctrl-item">
             <div class="ctrl-top">
-              <label for="washPumpSec">Pump Time (Sec)</label>
-              <input type="number" class="num-input" id="num_washPumpSec" min="1" max="30" value="4" oninput="syncFromInput('washPumpSec')" />
+              <label for="washPumpSec">Wash Pump Time (Sec)</label>
+              <input type="number" class="num-input" id="num_washPumpSec" min="1" max="30" value="5" oninput="syncFromInput('washPumpSec')" />
             </div>
-            <input type="range" id="washPumpSec" min="1" max="30" value="4" oninput="syncFromSlider('washPumpSec')" />
+            <input type="range" id="washPumpSec" min="1" max="30" value="5" oninput="syncFromSlider('washPumpSec')" />
           </div>
 
           <div class="ctrl-item">
             <div class="ctrl-top">
-              <label for="washBrushSec">Brush Move Time (Sec)</label>
+              <label for="washBrushSec">Wash Brush Move Time (Sec)</label>
               <input type="number" class="num-input" id="num_washBrushSec" min="1" max="30" value="5" oninput="syncFromInput('washBrushSec')" />
             </div>
             <input type="range" id="washBrushSec" min="1" max="30" value="5" oninput="syncFromSlider('washBrushSec')" />
@@ -656,7 +628,7 @@
 
         <!-- Light Orange Box 1: Self-Clean Pump & Brush Speed -->
         <div class="sq-box box-light-orange">
-          <div class="sq-header">3. Self-Clean Pump & Brush Speed</div>
+          <div class="sq-header">3. Self-Clean Pump & Brush Speed (Light Orange)</div>
 
           <div class="ctrl-item">
             <div class="ctrl-top">
@@ -677,7 +649,7 @@
 
         <!-- Light Orange Box 2: Self-Clean Pump & Brush Timing -->
         <div class="sq-box box-light-orange">
-          <div class="sq-header">4. Self-Clean Pump & Brush Timing</div>
+          <div class="sq-header">4. Self-Clean Pump & Brush Timing (Light Orange)</div>
 
           <div class="ctrl-item">
             <div class="ctrl-top">
@@ -697,21 +669,21 @@
         </div>
       </div>
 
-      <!-- LAST 2 BOXES: LOOP COUNT (LIGHT GREEN & LIGHT ORANGE) -->
+      <!-- LAST 2 BOXES: LOOP COUNT -->
       <div class="loops-row">
         <div class="loop-box box-light-green">
-          <span class="loop-box-title">Pump & Brush Loops</span>
+          <span class="loop-box-title">Pump & Brush Loops (Type Count)</span>
           <input type="number" class="loop-type-input" id="washLoops" min="1" max="20" value="2" oninput="syncLoopInput('washLoops')" />
         </div>
 
         <div class="loop-box box-light-orange">
-          <span class="loop-box-title">Self-Clean Loops</span>
+          <span class="loop-box-title">Self-Clean Loops (Type Count)</span>
           <input type="number" class="loop-type-input" id="cleanLoops" min="1" max="20" value="2" oninput="syncLoopInput('cleanLoops')" />
         </div>
       </div>
 
       <div class="serial-box" id="serialLog">
-        [Serial Monitor] Liquid Glass Simulator Ready.
+        [Serial Monitor] Ready — Wash runs Pump + Brush together; Pin 4 Fan ON, Pin 8 Fan OFF.
       </div>
     </div>
 
@@ -729,7 +701,7 @@
     const state = {
       washPumpSpeed: 180,
       washBrushDelay: 14,
-      washPumpSec: 4,
+      washPumpSec: 5,
       washBrushSec: 5,
       washLoops: 2,
 
@@ -739,16 +711,12 @@
       cleanBrushSec: 10,
       cleanLoops: 2,
 
-      heaterPreHeat: 90,
-      heaterFullHeat: 230,
-      fanSpeed: 255,
-      hotAirServoDelay: 12,
-      hotAirDurationSec: 15
+      fanSpeed: 255
     };
 
     let isRunning = false;
     let abortFlag = false;
-    let hotAirOffFlag = false;
+    let fanIsOn = false;
     let brushTimer = null;
     let fanTimer = null;
     let brushX = 0;
@@ -799,7 +767,29 @@
       buildArduinoCode();
     }
 
-    function setVisuals({ pump = 0, brushActive = false, brushDelay = 12, heater = 0, fan = 0 }) {
+    function updateFanVisual(isOn) {
+      fanIsOn = isOn;
+      const fanBox = document.getElementById('fanGlass');
+      const fanText = document.getElementById('fanText');
+      const rotor = document.getElementById('fanRotor');
+      clearInterval(fanTimer);
+      if (isOn) {
+        fanBox.style.borderColor = 'rgba(125, 211, 252, 0.8)';
+        fanText.textContent = `ON (${state.fanSpeed})`;
+        fanText.style.color = '#7dd3fc';
+        fanTimer = setInterval(() => {
+          fanDeg = (fanDeg + 32) % 360;
+          rotor.style.transform = `rotate(${fanDeg}deg)`;
+        }, 35);
+      } else {
+        fanBox.style.borderColor = 'rgba(255, 255, 255, 0.16)';
+        fanText.textContent = 'OFF (0)';
+        fanText.style.color = '#f8fafc';
+        rotor.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    function setWashCleanVisuals({ pump = 0, brushActive = false, brushDelay = 12 }) {
       const spray = document.getElementById('sprayZone');
       const pumpLabel = document.getElementById('pumpStatusLabel');
       if (pump > 0) {
@@ -812,47 +802,12 @@
         pumpLabel.style.color = '#cbd5e1';
       }
 
-      const heaterBox = document.getElementById('heaterGlass');
-      const heaterText = document.getElementById('heaterText');
-      if (heater > 0 && heater < 150) {
-        heaterBox.style.borderColor = 'rgba(251, 191, 36, 0.75)';
-        heaterText.textContent = `PRE-HEAT (${heater})`;
-        heaterText.style.color = '#fde68a';
-      } else if (heater >= 150) {
-        heaterBox.style.borderColor = 'rgba(248, 113, 113, 0.85)';
-        heaterText.textContent = `FULL HOT (${heater})`;
-        heaterText.style.color = '#fca5a5';
-      } else {
-        heaterBox.style.borderColor = 'rgba(255, 255, 255, 0.16)';
-        heaterText.textContent = 'OFF (0)';
-        heaterText.style.color = '#f8fafc';
-      }
-
-      const fanBox = document.getElementById('fanGlass');
-      const fanText = document.getElementById('fanText');
-      const rotor = document.getElementById('fanRotor');
-      clearInterval(fanTimer);
-      if (fan > 0) {
-        fanBox.style.borderColor = 'rgba(125, 211, 252, 0.75)';
-        fanText.textContent = `ON (${fan})`;
-        fanText.style.color = '#7dd3fc';
-        fanTimer = setInterval(() => {
-          fanDeg = (fanDeg + 32) % 360;
-          rotor.style.transform = `rotate(${fanDeg}deg)`;
-        }, 35);
-      } else {
-        fanBox.style.borderColor = 'rgba(255, 255, 255, 0.16)';
-        fanText.textContent = 'OFF (0)';
-        fanText.style.color = '#f8fafc';
-        rotor.style.transform = 'rotate(0deg)';
-      }
-
       const carriage = document.getElementById('brushCarriage');
       const carriageLabel = document.getElementById('brushCarriageLabel');
       const servoLabel = document.getElementById('servoStatusLabel');
       clearInterval(brushTimer);
       if (brushActive) {
-        const speedLabel = brushDelay <= 8 ? 'FAST' : 'SWEEP';
+        const speedLabel = brushDelay <= 8 ? 'FAST' : 'WASH';
         carriageLabel.textContent = `${speedLabel} (${brushDelay}ms)`;
         servoLabel.textContent = 'SG90 (D3): MOVING';
         servoLabel.style.color = '#86efac';
@@ -880,7 +835,7 @@
       return new Promise((resolve) => {
         const start = Date.now();
         const id = setInterval(() => {
-          if (abortFlag || hotAirOffFlag || Date.now() - start >= ms) {
+          if (abortFlag || Date.now() - start >= ms) {
             clearInterval(id);
             resolve();
           }
@@ -888,188 +843,149 @@
       });
     }
 
-    function lockStartButtons(locked) {
+    function lockCycleButtons(locked) {
       document.getElementById('btnWash').disabled = locked;
       document.getElementById('btnClean').disabled = locked;
-      document.getElementById('btnHotAirOn').disabled = locked;
     }
 
+    // PIN 2: WASH (Pump + Brush Servo Together for 2 loops)
     async function startWashCycle() {
       if (isRunning) return;
       isRunning = true;
       abortFlag = false;
-      lockStartButtons(true);
+      lockCycleButtons(true);
 
-      document.getElementById('modeTag').textContent = 'WASH MODE';
-      document.getElementById('statusText').textContent = 'Running Wash Cycle (Pump → Brush)';
-      logMsg(`Wash started: ${state.washLoops} loops (${state.washPumpSec}s pump, ${state.washBrushSec}s brush)`);
+      const cycleSec = Math.max(state.washPumpSec, state.washBrushSec);
+      document.getElementById('modeTag').textContent = 'WASH (PUMP + BRUSH)';
+      document.getElementById('statusText').textContent = 'Washing: Pump & Brush Running Together';
+      logMsg(`Pin 2 Wash: Pump + Brush ON together (${state.washLoops} loops)`);
 
       for (let i = 1; i <= state.washLoops; i++) {
         if (abortFlag) break;
         document.getElementById('loopProgress').textContent = `Wash Loop: ${i} / ${state.washLoops}`;
 
-        setVisuals({
+        // Pump and Brush Servo both ON together
+        setWashCleanVisuals({
           pump: state.washPumpSpeed,
-          brushActive: false,
-          heater: state.heaterPreHeat,
-          fan: 0
+          brushActive: true,
+          brushDelay: state.washBrushDelay
         });
-        await waitMs(state.washPumpSec * 1000);
+
+        await waitMs(cycleSec * 1000);
         if (abortFlag) break;
 
-        setVisuals({
-          pump: 0,
-          brushActive: true,
-          brushDelay: state.washBrushDelay,
-          heater: state.heaterPreHeat,
-          fan: 0
-        });
-        await waitMs(state.washBrushSec * 1000);
+        setWashCleanVisuals({ pump: 0, brushActive: false });
+        await waitMs(400);
       }
 
       if (!abortFlag) {
-        setVisuals({ pump: 0, brushActive: false, heater: state.heaterPreHeat, fan: 0 });
-        document.getElementById('statusText').textContent = 'Wash Complete (Heater Pre-Heated)';
+        setWashCleanVisuals({ pump: 0, brushActive: false });
+        document.getElementById('statusText').textContent = 'Wash Complete';
+        document.getElementById('modeTag').textContent = fanIsOn ? 'FAN ON' : 'IDLE';
         document.getElementById('loopProgress').textContent = 'Loop: Done';
         logMsg('Wash Cycle complete.');
       }
 
       isRunning = false;
-      lockStartButtons(false);
+      lockCycleButtons(false);
     }
 
-    async function startHotAirOn() {
-      if (isRunning) return;
-      isRunning = true;
-      hotAirOffFlag = false;
-      abortFlag = false;
-      lockStartButtons(true);
-
-      document.getElementById('modeTag').textContent = 'HOT AIR ON';
-      document.getElementById('statusText').textContent = 'Hot Air Motor ON (Press D8 to Turn OFF)';
-      document.getElementById('loopProgress').textContent = `Timer: ${state.hotAirDurationSec}s`;
-      logMsg('Hot Air ON (D4): Heater + Fan + SG90 Motor ON');
-
-      setVisuals({
-        pump: 0,
-        brushActive: true,
-        brushDelay: state.hotAirServoDelay,
-        heater: state.heaterFullHeat,
-        fan: state.fanSpeed
-      });
-
-      await waitMs(state.hotAirDurationSec * 1000);
-
-      if (!abortFlag && !hotAirOffFlag) {
-        document.getElementById('statusText').textContent = 'Safety Cool-Down (3s Fan)';
-        setVisuals({ pump: 0, brushActive: false, heater: 0, fan: state.fanSpeed });
-        await waitMs(3000);
-      }
-
-      if (!abortFlag) {
-        setVisuals({ pump: 0, brushActive: false, heater: 0, fan: 0 });
-        document.getElementById('statusText').textContent = 'Hot Air Cycle Complete';
-        document.getElementById('modeTag').textContent = 'IDLE';
-        document.getElementById('loopProgress').textContent = 'Loop: 0 / 0';
-      }
-
-      hotAirOffFlag = false;
-      isRunning = false;
-      lockStartButtons(false);
+    // PIN 4: ONLY FAN ON
+    function turnFanOn() {
+      updateFanVisual(true);
+      document.getElementById('statusText').textContent = 'Pin 4 Pressed: Only Fan ON';
+      document.getElementById('modeTag').textContent = 'FAN ON';
+      logMsg('Pin 4: Fan ON (Only Fan active)');
     }
 
-    function stopHotAirOff() {
-      hotAirOffFlag = true;
-      isRunning = false;
-      setVisuals({ pump: 0, brushActive: false, heater: 0, fan: 0 });
-      document.getElementById('statusText').textContent = 'Hot Air Motor OFF (D8 Pressed)';
-      document.getElementById('modeTag').textContent = 'MOTOR OFF';
-      lockStartButtons(false);
-      logMsg('Hot Air OFF (D8): Motor & outputs stopped.');
+    // PIN 8: ONLY FAN OFF
+    function turnFanOff() {
+      updateFanVisual(false);
+      document.getElementById('statusText').textContent = 'Pin 8 Pressed: Fan OFF';
+      if (!isRunning) document.getElementById('modeTag').textContent = 'IDLE';
+      logMsg('Pin 8: Fan OFF');
     }
 
+    // PIN 7: SELF-CLEAN (UNCHANGED)
     async function startSelfCleanCycle() {
       if (isRunning) return;
       isRunning = true;
       abortFlag = false;
-      lockStartButtons(true);
+      lockCycleButtons(true);
 
       document.getElementById('modeTag').textContent = 'SELF-CLEAN';
-      document.getElementById('statusText').textContent = 'Running Self-Clean Cycle';
-      logMsg(`Self-Clean started: ${state.cleanLoops} loops (${state.cleanPumpSec}s pump, ${state.cleanBrushSec}s brush)`);
+      document.getElementById('statusText').textContent = 'Running Self-Clean Cycle (Pin 7)';
+      logMsg(`Pin 7 Self-Clean started (${state.cleanLoops} loops)`);
 
       for (let i = 1; i <= state.cleanLoops; i++) {
         if (abortFlag) break;
         document.getElementById('loopProgress').textContent = `Clean Loop: ${i} / ${state.cleanLoops}`;
 
-        setVisuals({ pump: state.cleanPumpSpeed, brushActive: false, heater: 0, fan: 0 });
+        setWashCleanVisuals({ pump: state.cleanPumpSpeed, brushActive: false });
         await waitMs(state.cleanPumpSec * 1000);
         if (abortFlag) break;
 
-        setVisuals({ pump: 0, brushActive: true, brushDelay: state.cleanBrushDelay, heater: 0, fan: 0 });
+        setWashCleanVisuals({ pump: 0, brushActive: true, brushDelay: state.cleanBrushDelay });
         await waitMs(state.cleanBrushSec * 1000);
       }
 
       if (!abortFlag) {
-        setVisuals({ pump: 0, brushActive: false, heater: 0, fan: 0 });
+        setWashCleanVisuals({ pump: 0, brushActive: false });
         document.getElementById('statusText').textContent = 'Self-Clean Complete';
-        document.getElementById('modeTag').textContent = 'IDLE';
+        document.getElementById('modeTag').textContent = fanIsOn ? 'FAN ON' : 'IDLE';
         document.getElementById('loopProgress').textContent = 'Loop: Done';
         logMsg('Self-Clean Cycle complete.');
       }
 
       isRunning = false;
-      lockStartButtons(false);
+      lockCycleButtons(false);
     }
 
     function stopAllNow() {
       abortFlag = true;
-      hotAirOffFlag = true;
       isRunning = false;
-      setVisuals({ pump: 0, brushActive: false, heater: 0, fan: 0 });
+      updateFanVisual(false);
+      setWashCleanVisuals({ pump: 0, brushActive: false });
       document.getElementById('statusText').textContent = 'STOPPED — All Outputs OFF';
       document.getElementById('modeTag').textContent = 'STOPPED';
       document.getElementById('loopProgress').textContent = 'Loop: 0 / 0';
-      lockStartButtons(false);
-      logMsg('STOP ALL: Everything turned OFF.');
+      lockCycleButtons(false);
+      logMsg('STOP ALL: All outputs OFF.');
     }
 
     function buildArduinoCode() {
+      const washDurationSec = Math.max(state.washPumpSec, state.washBrushSec);
       const code = `#include <Servo.h>
 
-// --- Pin Mapping ---
-const int servoPin        = 3; // SG90 Servo Signal (PWM ~3) - Direct 5V/GND/Signal
-const int waterPumpPin    = 5; // MOSFET -> Water Pump (PWM ~5)
-const int heaterPin       = 6; // MOSFET -> 12V Heater Wire (PWM ~6)
-const int fanPin          = 9; // MOSFET -> Blower Fan (PWM ~9)
+// --- Pin Definitions ---
+const int servoPin       = 3; // SG90 Servo Signal (PWM ~3) - Direct 5V/GND/Signal
+const int waterPumpPin   = 5; // MOSFET -> Water Pump (PWM ~5)
+const int heaterPin      = 6; // MOSFET -> Heater Pin (PWM ~6 - Kept OFF)
+const int fanPin         = 9; // MOSFET -> Blower Fan (PWM ~9)
 
-const int btnWashPin      = 2; // Button 1: Wash Cycle
-const int btnHotAirOnPin  = 4; // Hot Air Motor ON Button
-const int btnCleanPin     = 7; // Button 3: Self-Clean Cycle
-const int btnHotAirOffPin = 8; // Hot Air Motor OFF Button
+const int btnWashPin     = 2; // Pin 2: Wash (Pump + Brush Servo Together, 2 loops)
+const int btnFanOnPin    = 4; // Pin 4: Only Fan ON
+const int btnCleanPin    = 7; // Pin 7: Self-Clean (Unchanged)
+const int btnFanOffPin   = 8; // Pin 8: Fan OFF
 
 Servo brushServo;
 
-// --- Light Green: Pump & Brush (Wash) Settings ---
-const int washPumpSpeed       = ${state.washPumpSpeed};
-const int washBrushDelay      = ${state.washBrushDelay};
-const unsigned long washPumpMs  = ${state.washPumpSec * 1000}UL;
-const unsigned long washBrushMs = ${state.washBrushSec * 1000}UL;
-const int washLoops           = ${state.washLoops};
+// --- Light Green: Wash (Pump + Brush Together) ---
+const int washPumpSpeed          = ${state.washPumpSpeed};
+const int washBrushDelay         = ${state.washBrushDelay};
+const unsigned long washPumpMs   = ${state.washPumpSec * 1000}UL;
+const unsigned long washBrushMs  = ${state.washBrushSec * 1000}UL;
+const int washLoops              = ${state.washLoops};
 
-// --- Light Orange: Self-Clean Settings ---
-const int cleanPumpSpeed       = ${state.cleanPumpSpeed};
-const int cleanBrushDelay      = ${state.cleanBrushDelay};
+// --- Light Orange: Self-Clean (Unchanged) ---
+const int cleanPumpSpeed         = ${state.cleanPumpSpeed};
+const int cleanBrushDelay        = ${state.cleanBrushDelay};
 const unsigned long cleanPumpMs  = ${state.cleanPumpSec * 1000}UL;
 const unsigned long cleanBrushMs = ${state.cleanBrushSec * 1000}UL;
-const int cleanLoops           = ${state.cleanLoops};
+const int cleanLoops             = ${state.cleanLoops};
 
-// --- Heater & Hot Air Settings ---
-const int heaterPreHeat         = ${state.heaterPreHeat};
-const int heaterFullHeat        = ${state.heaterFullHeat};
-const int fanSpeed              = ${state.fanSpeed};
-const int hotAirServoDelay      = ${state.hotAirServoDelay};
-const unsigned long hotAirMs    = ${state.hotAirDurationSec * 1000}UL;
+// --- Fan Speed ---
+const int fanSpeed               = ${state.fanSpeed};
 
 void setup() {
   pinMode(waterPumpPin, OUTPUT);
@@ -1077,28 +993,40 @@ void setup() {
   pinMode(fanPin, OUTPUT);
 
   pinMode(btnWashPin, INPUT_PULLUP);
-  pinMode(btnHotAirOnPin, INPUT_PULLUP);
+  pinMode(btnFanOnPin, INPUT_PULLUP);
   pinMode(btnCleanPin, INPUT_PULLUP);
-  pinMode(btnHotAirOffPin, INPUT_PULLUP);
+  pinMode(btnFanOffPin, INPUT_PULLUP);
 
   brushServo.attach(servoPin);
   brushServo.write(90);
 
-  allOff();
+  analogWrite(waterPumpPin, 0);
+  analogWrite(heaterPin, 0);
+  analogWrite(fanPin, 0);
+
   Serial.begin(9600);
 }
 
 void loop() {
+  // Pin 2: Wash (Pump + Brush Servo together)
   if (digitalRead(btnWashPin) == LOW) {
     delay(200);
-    runWash();
-  } else if (digitalRead(btnHotAirOnPin) == LOW) {
+    runWashTogether();
+  }
+  // Pin 4: Only Fan ON
+  else if (digitalRead(btnFanOnPin) == LOW) {
     delay(200);
-    runHotAirOn();
-  } else if (digitalRead(btnHotAirOffPin) == LOW) {
+    analogWrite(fanPin, fanSpeed);
+    Serial.println("Pin 4: Fan ON");
+  }
+  // Pin 8: Fan OFF
+  else if (digitalRead(btnFanOffPin) == LOW) {
     delay(200);
-    allOff();
-  } else if (digitalRead(btnCleanPin) == LOW) {
+    analogWrite(fanPin, 0);
+    Serial.println("Pin 8: Fan OFF");
+  }
+  // Pin 7: Self-Clean (Unchanged)
+  else if (digitalRead(btnCleanPin) == LOW) {
     delay(200);
     runSelfClean();
   }
@@ -1106,56 +1034,44 @@ void loop() {
 
 void sweepOnce(int stepDelay) {
   for (int pos = 0; pos <= 180; pos += 3) {
-    if (digitalRead(btnHotAirOffPin) == LOW) return;
     brushServo.write(pos);
     delay(stepDelay);
   }
   for (int pos = 180; pos >= 0; pos -= 3) {
-    if (digitalRead(btnHotAirOffPin) == LOW) return;
     brushServo.write(pos);
     delay(stepDelay);
   }
 }
 
-void runWash() {
-  analogWrite(heaterPin, heaterPreHeat);
+// 1. WASH: Pump + Brush Servo ON Together (2 loops)
+void runWashTogether() {
+  unsigned long totalWashMs = max(washPumpMs, washBrushMs);
+
   for (int i = 1; i <= washLoops; i++) {
-    analogWrite(waterPumpPin, washPumpSpeed);
-    delay(washPumpMs);
-    analogWrite(waterPumpPin, 0);
-
     unsigned long t0 = millis();
-    while (millis() - t0 < washBrushMs) {
-      sweepOnce(washBrushDelay);
+    while (millis() - t0 < totalWashMs) {
+      unsigned long elapsed = millis() - t0;
+
+      // Pump runs for washPumpMs alongside brush
+      if (elapsed < washPumpMs) {
+        analogWrite(waterPumpPin, washPumpSpeed);
+      } else {
+        analogWrite(waterPumpPin, 0);
+      }
+
+      // Brush servo sweeps for washBrushMs
+      if (elapsed < washBrushMs) {
+        sweepOnce(washBrushDelay);
+      }
     }
+    analogWrite(waterPumpPin, 0);
     brushServo.write(90);
+    delay(300);
   }
 }
 
-void runHotAirOn() {
-  analogWrite(heaterPin, heaterFullHeat);
-  analogWrite(fanPin, fanSpeed);
-
-  unsigned long start = millis();
-  while (millis() - start < hotAirMs) {
-    if (digitalRead(btnHotAirOffPin) == LOW) {
-      delay(200);
-      allOff();
-      return;
-    }
-    sweepOnce(hotAirServoDelay);
-  }
-
-  analogWrite(heaterPin, 0);
-  brushServo.write(90);
-  delay(3000);
-  allOff();
-}
-
+// 3. SELF-CLEAN (Pin 7 - Unchanged)
 void runSelfClean() {
-  analogWrite(heaterPin, 0);
-  analogWrite(fanPin, 0);
-
   for (int i = 1; i <= cleanLoops; i++) {
     analogWrite(waterPumpPin, cleanPumpSpeed);
     delay(cleanPumpMs);
@@ -1167,13 +1083,7 @@ void runSelfClean() {
     }
     brushServo.write(90);
   }
-  allOff();
-}
-
-void allOff() {
   analogWrite(waterPumpPin, 0);
-  analogWrite(heaterPin, 0);
-  analogWrite(fanPin, 0);
   brushServo.write(90);
 }`;
 
